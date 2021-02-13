@@ -1,0 +1,61 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Sun Feb 2 17:39:26 EST 2020.
+[PARSEC] Packages to build:  splash2.barnes splash2.cholesky splash2.fft splash2.fmm splash2.lu_cb splash2.lu_ncb splash2.ocean_cp splash2.ocean_ncp splash2.radiosity splash2.radix splash2.raytrace splash2.volrend splash2.water_nsquared splash2.water_spatial
+
+[PARSEC] [========== Building package splash2.barnes [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.barnes ----------]
+[PARSEC] Package splash2.barnes already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.cholesky [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.cholesky ----------]
+[PARSEC] Package splash2.cholesky already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] Package splash2.fft already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.fmm [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fmm ----------]
+[PARSEC] Package splash2.fmm already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.lu_cb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_cb ----------]
+[PARSEC] Package splash2.lu_cb already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.lu_ncb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_ncb ----------]
+[PARSEC] Package splash2.lu_ncb already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.ocean_cp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_cp ----------]
+[PARSEC] Package splash2.ocean_cp already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.ocean_ncp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_ncp ----------]
+[PARSEC] Package splash2.ocean_ncp already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.radiosity [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.radiosity ----------]
+[PARSEC] Package splash2.radiosity already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.radix [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.radix ----------]
+[PARSEC] Package splash2.radix already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.raytrace [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.raytrace ----------]
+[PARSEC] Package splash2.raytrace already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.volrend [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.volrend ----------]
+[PARSEC] Package splash2.volrend already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.water_nsquared [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.water_nsquared ----------]
+[PARSEC] Package splash2.water_nsquared already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.water_spatial [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.water_spatial ----------]
+[PARSEC] Package splash2.water_spatial already exists, proceeding.
+[PARSEC] Done.

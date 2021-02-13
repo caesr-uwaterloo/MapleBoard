@@ -1,0 +1,3 @@
+00 Invalid
+01 Xclusive
+02 Shared

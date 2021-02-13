@@ -1,0 +1,9 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Sun Oct 6 18:13:13 EDT 2019.
+[PARSEC] Packages to build:  splash2.water_spatial
+
+[PARSEC] [========== Building package splash2.water_spatial [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.water_spatial ----------]
+[PARSEC] Package splash2.water_spatial already exists, proceeding.
+[PARSEC] Done.

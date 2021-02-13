@@ -1,0 +1,38 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Apr 30 14:06:36 EDT 2020.
+[PARSEC] Packages to build:  splash2.radiosity
+
+[PARSEC] [========== Building package splash2.radiosity [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.radiosity ----------]
+[PARSEC] splash2.radiosity does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.radiosity ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.radiosity.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread model.H > model.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread parallel.H > parallel.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread patch.H > patch.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread task.H > task.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread radiosity.H > radiosity.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread rad_main.C > rad_main.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread patchman.C > patchman.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread elemman.C > elemman.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread taskman.C > taskman.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread modelman.C > modelman.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread smallobj.C > smallobj.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread display.C > display.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread visible.C > visible.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread rad_tools.C > rad_tools.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread room_model.C > room_model.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" rad_main.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" patchman.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" elemman.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" taskman.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" modelman.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" smallobj.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" display.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" visible.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g -DM_PI="(3.14159265358979323846)" rad_tools.c
+makefile:55: recipe for target 'rad_main.o' failed
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

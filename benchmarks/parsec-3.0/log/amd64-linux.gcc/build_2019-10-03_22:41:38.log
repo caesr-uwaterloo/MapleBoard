@@ -1,0 +1,46 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Oct 3 22:41:38 EDT 2019.
+[PARSEC] Packages to build:  splash2.cholesky
+
+[PARSEC] [========== Building package splash2.cholesky [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.cholesky ----------]
+[PARSEC] splash2.cholesky does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.cholesky ----------]
+[PARSEC] Copying source code of package splash2.cholesky.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread matrix.H > matrix.h
+m4 ../../../../null_macros/c.m4.null.pthread amal.C > amal.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  amal.c
+m4 ../../../../null_macros/c.m4.null.pthread assign.C > assign.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  assign.c
+m4 ../../../../null_macros/c.m4.null.pthread bfac.C > bfac.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  bfac.c
+m4 ../../../../null_macros/c.m4.null.pthread bksolve.C > bksolve.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  bksolve.c
+m4 ../../../../null_macros/c.m4.null.pthread block2.C > block2.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  block2.c
+m4 ../../../../null_macros/c.m4.null.pthread fo.C > fo.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  fo.c
+m4 ../../../../null_macros/c.m4.null.pthread mf.C > mf.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  mf.c
+m4 ../../../../null_macros/c.m4.null.pthread numLL.C > numLL.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  numLL.c
+m4 ../../../../null_macros/c.m4.null.pthread parts.C > parts.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  parts.c
+m4 ../../../../null_macros/c.m4.null.pthread seg.C > seg.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  seg.c
+m4 ../../../../null_macros/c.m4.null.pthread solve.C > solve.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  solve.c
+m4 ../../../../null_macros/c.m4.null.pthread tree.C > tree.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  tree.c
+m4 ../../../../null_macros/c.m4.null.pthread util.C > util.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  util.c
+m4 ../../../../null_macros/c.m4.null.pthread malloc.C > malloc.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  malloc.c
+/usr/bin/gcc amal.o assign.o bfac.o bksolve.o block2.o fo.o mf.o numLL.o parts.o seg.o solve.o tree.o util.o malloc.o   -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  -o cholesky -L/usr/lib64 -L/usr/lib -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/kernels/cholesky/inst/amd64-linux.gcc/bin
+cp -f cholesky /home/allen/parsec/parsec-3.0/ext/splash2/kernels/cholesky/inst/amd64-linux.gcc/bin/cholesky
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/kernels/cholesky/inst/amd64-linux.gcc/bin/run.sh
+[PARSEC] Done.

@@ -1,0 +1,182 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Thu Oct 3 18:01:08 EDT 2019.
+[PARSEC] Packages to build:  splash2.barnes splash2.cholesky splash2.fft splash2.fmm splash2.lu_cb splash2.lu_ncb splash2.ocean_cp splash2.ocean_ncp splash2.radiosity splash2.radix splash2.raytrace splash2.volrend splash2.water_nsquared splash2.water_spatial
+
+[PARSEC] [========== Building package splash2.barnes [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.barnes ----------]
+[PARSEC] splash2.barnes does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.barnes ----------]
+[PARSEC] Copying source code of package splash2.barnes.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread stdinc.H > stdinc.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread vectmath.H > vectmath.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread defs.H > defs.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread code.H > code.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread code.C > code.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  code.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread code_io.C > code_io.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  code_io.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread load.C > load.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  load.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread grav.C > grav.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  grav.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread getparam.C > getparam.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  getparam.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread util.C > util.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  util.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc code.o code_io.o load.o grav.o getparam.o util.o -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  -o barnes -L/opt/riscv//lib64 -L/opt/riscv//lib -lm -lpthread
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/barnes/inst/riscv-linux.gcc/bin
+cp -f barnes /home/allen/parsec/parsec-3.0/ext/splash2/apps/barnes/inst/riscv-linux.gcc/bin/barnes
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/barnes/inst/riscv-linux.gcc/bin/run.sh
+
+[PARSEC] [========== Building package splash2.cholesky [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.cholesky ----------]
+[PARSEC] Package splash2.cholesky already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] Package splash2.fft already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.fmm [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fmm ----------]
+[PARSEC] splash2.fmm does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.fmm ----------]
+[PARSEC] Copying source code of package splash2.fmm.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread defs.H > defs.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread defs.C > defs.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread particle.H > particle.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread box.H > box.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread memory.H > memory.h
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   defs.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread memory.C > memory.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   memory.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread particle.C > particle.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   particle.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread box.C > box.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   box.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread partition_grid.H > partition_grid.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread partition_grid.C > partition_grid.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   partition_grid.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread cost_zones.H > cost_zones.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread cost_zones.C > cost_zones.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   cost_zones.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread construct_grid.H > construct_grid.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread construct_grid.C > construct_grid.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   construct_grid.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread interactions.H > interactions.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread interactions.C > interactions.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   interactions.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread fmm.C > fmm.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   fmm.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc defs.o memory.o particle.o box.o partition_grid.o cost_zones.o construct_grid.o interactions.o fmm.o  -O2 -w   -o fmm -L/opt/riscv//lib64 -L/opt/riscv//lib -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/fmm/inst/riscv-linux.gcc/bin
+cp -f fmm /home/allen/parsec/parsec-3.0/ext/splash2/apps/fmm/inst/riscv-linux.gcc/bin/fmm
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/fmm/inst/riscv-linux.gcc/bin/run.sh
+
+[PARSEC] [========== Building package splash2.lu_cb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_cb ----------]
+[PARSEC] splash2.lu_cb does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.lu_cb ----------]
+[PARSEC] Copying source code of package splash2.lu_cb.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread lu.C > lu.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  lu.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc lu.o -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  -o lu_cb -L/opt/riscv//lib64 -L/opt/riscv//lib -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_cb/inst/riscv-linux.gcc/bin
+cp -f lu_cb /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_cb/inst/riscv-linux.gcc/bin/lu_cb
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_cb/inst/riscv-linux.gcc/bin/run.sh
+
+[PARSEC] [========== Building package splash2.lu_ncb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_ncb ----------]
+[PARSEC] splash2.lu_ncb does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.lu_ncb ----------]
+[PARSEC] Copying source code of package splash2.lu_ncb.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread lu.C > lu.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w  lu.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc lu.o -O2 -w  -o lu_ncb -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_ncb/inst/riscv-linux.gcc/bin
+cp -f lu_ncb /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_ncb/inst/riscv-linux.gcc/bin/lu_ncb
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_ncb/inst/riscv-linux.gcc/bin/run.sh
+
+[PARSEC] [========== Building package splash2.ocean_cp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_cp ----------]
+[PARSEC] splash2.ocean_cp does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.ocean_cp ----------]
+[PARSEC] Copying source code of package splash2.ocean_cp.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread decs.H > decs.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread main.C > main.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   main.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread jacobcalc.C > jacobcalc.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   jacobcalc.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread jacobcalc2.C > jacobcalc2.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   jacobcalc2.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread laplacalc.C > laplacalc.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   laplacalc.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread slave1.C > slave1.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   slave1.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread slave2.C > slave2.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   slave2.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread multi.C > multi.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   multi.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread linkup.C > linkup.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   linkup.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread subblock.C > subblock.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   subblock.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc main.o jacobcalc.o jacobcalc2.o laplacalc.o slave1.o slave2.o multi.o linkup.o subblock.o  -o ocean_cp -L/opt/riscv//lib64 -L/opt/riscv//lib -lpthread -lm 
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_cp/inst/riscv-linux.gcc/bin
+cp -f ocean_cp /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_cp/inst/riscv-linux.gcc/bin/ocean_cp
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_cp/inst/riscv-linux.gcc/bin/run.sh
+
+[PARSEC] [========== Building package splash2.ocean_ncp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_ncp ----------]
+[PARSEC] splash2.ocean_ncp does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.ocean_ncp ----------]
+[PARSEC] Copying source code of package splash2.ocean_ncp.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread decs.H > decs.h
+m4 ../../../../null_macros/c.m4.null.pthread main.C > main.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   main.c
+m4 ../../../../null_macros/c.m4.null.pthread jacobcalc.C > jacobcalc.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   jacobcalc.c
+m4 ../../../../null_macros/c.m4.null.pthread laplacalc.C > laplacalc.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   laplacalc.c
+m4 ../../../../null_macros/c.m4.null.pthread slave1.C > slave1.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   slave1.c
+m4 ../../../../null_macros/c.m4.null.pthread slave2.C > slave2.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   slave2.c
+m4 ../../../../null_macros/c.m4.null.pthread multi.C > multi.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -O2 -w   multi.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc main.o jacobcalc.o laplacalc.o slave1.o slave2.o multi.o -o ocean_ncp -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_ncp/inst/riscv-linux.gcc/bin
+cp -f ocean_ncp /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_ncp/inst/riscv-linux.gcc/bin/ocean_ncp
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_ncp/inst/riscv-linux.gcc/bin/run.sh
+
+[PARSEC] [========== Building package splash2.radiosity [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.radiosity ----------]
+[PARSEC] splash2.radiosity does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.radiosity ----------]
+[PARSEC] Copying source code of package splash2.radiosity.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread model.H > model.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread parallel.H > parallel.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread patch.H > patch.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread task.H > task.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread radiosity.H > radiosity.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread rad_main.C > rad_main.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g  rad_main.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread patchman.C > patchman.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g  patchman.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread elemman.C > elemman.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g  elemman.c
+makefile:55: recipe for target 'elemman.o' failed
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

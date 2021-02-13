@@ -1,0 +1,81 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-rv64-cross-x86.gcc started on Thu Oct 3 15:20:54 EDT 2019.
+[PARSEC] Packages to build:  splash2.fft
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] splash2.fft does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.fft ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.fft.
+[PARSEC] Running 'env version=IN_PARSEC ':
+CONDA_SHLVL=1
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LD_LIBRARY_PATH=/lib:/lib64:/pkgs/libs/hooks/inst//lib
+CONDA_EXE=/home/allen/anaconda3/bin/conda
+STY=12738.back
+SSH_CONNECTION=127.0.0.1 45628 127.0.0.1 22
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LANG=en_US.UTF-8
+SPLASH2_ROOT=/home/allen/Dropbox/Caesr/riscv-splash2/splash2_benchmark
+OLDPWD=pwd
+ELF_ROOT=/home/allen/Dropbox/Caesr/riscv/tests/isa/output/
+ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+CONDA_PREFIX=/home/allen/anaconda3
+JAVA_HOME=/opt/jdk1.8.0_211
+RISCV=/opt/riscv-ima/
+AWS_FPGA_REPO_DIR=/home/allen/src/aws-fpga
+FPGA_ROOT=/home/allen/Dropbox/Caesr/riscv-new/fpga/
+S_COLORS=auto
+XILINX_VIVADO=/opt/Xilinx/Vivado/2018.3/
+CLASSPATH=.:.:
+XILINX_SDX=/opt/Xilinx/SDx/2018.3/
+XDG_SESSION_ID=456
+USER=allen
+xxPARSECDIRxx=/home/allen/parsec/parsec-3.0
+PWD=/home/allen/parsec/parsec-3.0/ext/splash2/kernels/fft/obj/riscv-rv64-cross-x86.gcc
+NUMBAPRO_NVVM=/usr/local/cuda/lib64/libnvvm.so
+HOME=/home/allen
+CONDA_PYTHON_EXE=/home/allen/anaconda3/bin/python
+WINDOW=0
+SSH_CLIENT=127.0.0.1 45628 22
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PINPATH=/opt/pin-2.14-71313-gcc.4.4.7-linux/
+LIBCONFIGPATH=/usr/local/lib/
+CONDA_PROMPT_MODIFIER=
+SSH_TTY=/dev/pts/2
+MAIL=/var/mail/allen
+TERM=screen
+SHELL=/bin/bash
+SHLVL=3
+MANPATH=/home/allen/parsec/parsec-3.0/man
+PARSECDIR=/home/allen/parsec/parsec-3.0
+LOGNAME=allen
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+XDG_RUNTIME_DIR=/run/user/1000
+PATH=/home/allen/parsec/parsec-3.0/bin:/opt/crosstool-ng/bin/:/opt/qemu/bin:/opt/jdk1.8.0_211/bin/:/opt/Xilinx/SDx/2018.3//bin:/opt/Xilinx/Vivado/2018.3/bin/:/opt/riscv/bin:/opt/qemu/bin:/opt/crosstool-ng/bin:/home/allen/.cargo/bin:/home/allen/.local/bin:/opt/crosstool-ng/bin/:/opt/qemu/bin:/opt/jdk1.8.0_211/bin/:/opt/Xilinx/SDx/2018.3//bin:/opt/Xilinx/Vivado/2018.3/bin/:/opt/riscv/bin:/home/allen/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/allen/parsec/parsec-3.0/bin
+NUMBAPRO_LIBDEVICE=/usr/local/cuda/nvvm/libdevice/
+SBT_OPTS=-Xms512M -Xmx8192M -Xss128M -XX:MaxMetaspaceSize=8192M
+CONDA_DEFAULT_ENV=base
+PARSECPLAT=riscv-rv64-cross-x86.gcc
+ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk/
+TERMCAP=SC|screen|VT 100/ANSI X3.64 virtual terminal:\
+	:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC:UP=\E[%dA:bs:bt=\E[Z:\
+	:cd=\E[J:ce=\E[K:cl=\E[H\E[J:cm=\E[%i%d;%dH:ct=\E[3g:\
+	:do=^J:nd=\E[C:pt:rc=\E8:rs=\Ec:sc=\E7:st=\EH:up=\EM:\
+	:le=^H:bl=^G:cr=^M:it#8:ho=\E[H:nw=\EE:ta=^I:is=\E)0:\
+	:li#24:co#80:am:xn:xv:LP:sr=\EM:al=\E[L:AL=\E[%dL:\
+	:cs=\E[%i%d;%dr:dl=\E[M:DL=\E[%dM:dc=\E[P:DC=\E[%dP:\
+	:im=\E[4h:ei=\E[4l:mi:IC=\E[%d@:ks=\E[?1h\E=:\
+	:ke=\E[?1l\E>:vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l:\
+	:ti=\E[?1049h:te=\E[?1049l:Km=\E[M:k0=\E[10~:k1=\EOP:\
+	:k2=\EOQ:k3=\EOR:k4=\EOS:k5=\E[15~:k6=\E[17~:k7=\E[18~:\
+	:k8=\E[19~:k9=\E[20~:k;=\E[21~:F1=\E[23~:F2=\E[24~:\
+	:kh=\E[1~:@1=\E[1~:kH=\E[4~:@7=\E[4~:kN=\E[6~:kP=\E[5~:\
+	:kI=\E[2~:kD=\E[3~:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:
+LESSOPEN=| /usr/bin/lesspipe %s
+_=/usr/bin/env
+version=IN_PARSEC
+[PARSEC] Running 'env version=IN_PARSEC install':
+[PARSEC] Error: 'env version=IN_PARSEC install' failed.

@@ -1,0 +1,10 @@
+0 NONE_EVENT
+1 GetS
+2 GetM
+3 PutM
+4 Upg
+5 MemData
+6 MemAck
+7 Invl
+8 PutS
+9 GetSE

@@ -1,0 +1,20 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Sat Apr 11 12:36:47 EDT 2020.
+[PARSEC] Packages to build:  splash2.lu_cb
+
+[PARSEC] [========== Building package splash2.lu_cb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_cb ----------]
+[PARSEC] splash2.lu_cb does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.lu_cb ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.lu_cb.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread lu.C > lu.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -w -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  lu.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc lu.o -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -w -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  -o lu_cb -L/opt/riscv//lib64 -L/opt/riscv//lib -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_cb/inst/riscv-linux.gcc/bin
+cp -f lu_cb /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_cb/inst/riscv-linux.gcc/bin/lu_cb
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/kernels/lu_cb/inst/riscv-linux.gcc/bin/run.sh
+[PARSEC] Done.

@@ -1,0 +1,83 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Oct 3 16:49:48 EDT 2019.
+[PARSEC] Packages to build:  splash2.volrend
+
+[PARSEC] [========== Building package splash2.volrend [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.volrend ----------]
+[PARSEC] splash2.volrend does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.volrend ----------]
+[PARSEC] Copying source code of package splash2.volrend.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+make -C libtiff
+make[1]: Entering directory '/home/allen/parsec/parsec-3.0/ext/splash2/apps/volrend/obj/amd64-linux.gcc/libtiff'
+gcc -o mkg3states -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi mkg3states.c
+./mkg3states -c > g3states.h
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_fax3.o tif_fax3.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_fax4.o tif_fax4.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_aux.o tif_aux.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_ccittrle.o tif_ccittrle.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_close.o tif_close.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_compat.o tif_compat.c
+/usr/bin/gcc -c -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi -DPACKBITS_SUPPORT -DLZW_SUPPORT -DCCITT_SUPPORT -DTHUNDER_SUPPORT -DNEXT_SUPPORT  tif_compress.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_dir.o tif_dir.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_dirinfo.o tif_dirinfo.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_dirread.o tif_dirread.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_dirwrite.o tif_dirwrite.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_dumpmode.o tif_dumpmode.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_error.o tif_error.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_getimage.o tif_getimage.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_jpeg.o tif_jpeg.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_flush.o tif_flush.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_lzw.o tif_lzw.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_next.o tif_next.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_open.o tif_open.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_packbits.o tif_packbits.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_print.o tif_print.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_read.o tif_read.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_swab.o tif_swab.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_strip.o tif_strip.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_thunder.o tif_thunder.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_tile.o tif_tile.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_version.o tif_version.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_warning.o tif_warning.c
+/usr/bin/gcc -O -I. -I/usr/include/bsd -DBSDTYPES -DUSE_VARARGS=0 -DUSE_PROTOTYPES=1 -DHAVE_IEEEFP=1 -DCOLORIMETRY_SUPPORT -DJPEG_SUPPORT -DYCBCR_SUPPORT -DCMYK_SUPPORT -DMMAP_SUPPORT  -ansi   -c -o tif_write.o tif_write.c
+/usr/bin/ar rc libtiff.a tif_fax3.o tif_fax4.o tif_aux.o tif_ccittrle.o tif_close.o tif_compat.o tif_compress.o tif_dir.o tif_dirinfo.o tif_dirread.o tif_dirwrite.o tif_dumpmode.o tif_error.o tif_getimage.o tif_jpeg.o tif_flush.o tif_lzw.o tif_next.o tif_open.o tif_packbits.o tif_print.o tif_read.o tif_swab.o tif_strip.o tif_thunder.o tif_tile.o tif_version.o tif_warning.o tif_write.o
+make[1]: Leaving directory '/home/allen/parsec/parsec-3.0/ext/splash2/apps/volrend/obj/amd64-linux.gcc/libtiff'
+m4 ../../../../null_macros/c.m4.null.pthread user_options.H > user_options.h
+m4 ../../../../null_macros/c.m4.null.pthread const.H > const.h
+m4 ../../../../null_macros/c.m4.null.pthread my_types.H > my_types.h
+m4 ../../../../null_macros/c.m4.null.pthread global.H > global.h
+m4 ../../../../null_macros/c.m4.null.pthread macros.H > macros.h
+m4 ../../../../null_macros/c.m4.null.pthread address.H > address.h
+m4 ../../../../null_macros/c.m4.null.pthread incl.H > incl.h
+m4 ../../../../null_macros/c.m4.null.pthread anl.H > anl.h
+m4 ../../../../null_macros/c.m4.null.pthread main.C > main.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff main.c
+m4 ../../../../null_macros/c.m4.null.pthread file.C > file.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff file.c
+m4 ../../../../null_macros/c.m4.null.pthread option.C > option.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff option.c
+m4 ../../../../null_macros/c.m4.null.pthread map.C > map.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff map.c
+m4 ../../../../null_macros/c.m4.null.pthread normal.C > normal.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff normal.c
+m4 ../../../../null_macros/c.m4.null.pthread opacity.C > opacity.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff opacity.c
+m4 ../../../../null_macros/c.m4.null.pthread octree.C > octree.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff octree.c
+m4 ../../../../null_macros/c.m4.null.pthread view.C > view.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff view.c
+m4 ../../../../null_macros/c.m4.null.pthread render.C > render.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff render.c
+m4 ../../../../null_macros/c.m4.null.pthread adaptive.C > adaptive.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff adaptive.c
+m4 ../../../../null_macros/c.m4.null.pthread raytrace.C > raytrace.c
+/usr/bin/gcc -c -O2 -w -DPRESHD  -Ilibtiff raytrace.c
+/usr/bin/gcc main.o file.o option.o map.o normal.o opacity.o octree.o view.o render.o adaptive.o raytrace.o -O2 -w -DPRESHD  -Ilibtiff -o volrend -O2 -w -pthread -lm -Ilibtiff -Llibtiff -ltiff
+Done
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/volrend/inst/amd64-linux.gcc/bin
+cp -f volrend /home/allen/parsec/parsec-3.0/ext/splash2/apps/volrend/inst/amd64-linux.gcc/bin/volrend
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/volrend/inst/amd64-linux.gcc/bin/run.sh
+[PARSEC] Done.

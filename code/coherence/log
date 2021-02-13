@@ -1,0 +1,15 @@
+[0m[[0m[0minfo[0m] [0m[0mLoading settings for project global-plugins from idea.sbt ...[0m
+[0m[[0m[0minfo[0m] [0m[0mLoading global plugins from /home/allen/.sbt/1.0/plugins[0m
+[0m[[0m[0minfo[0m] [0m[0mLoading settings for project coherence-build from plugins.sbt ...[0m
+[0m[[0m[0minfo[0m] [0m[0mLoading project definition from /home/allen/working/scala-deployment/coherence/project[0m
+[0m[[0m[0minfo[0m] [0m[0mLoading settings for project chiselCoherence from build.sbt ...[0m
+[0m[[0m[0minfo[0m] [0m[0mSet current project to coherence (in build file:/home/allen/working/scala-deployment/coherence/)[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/allen/working/scala-deployment/coherence/target/scala-2.12/test-classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mScalaTest[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 26 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 0, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 0, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[33mNo tests were executed.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mPassed: Total 0, Failed 0, Errors 0, Passed 0[0m
+[0m[[0m[0minfo[0m] [0m[0mNo tests to run for coreMacros / Test / testOnly[0m

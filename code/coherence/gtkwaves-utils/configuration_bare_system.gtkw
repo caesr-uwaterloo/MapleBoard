@@ -1,0 +1,99 @@
+[*]
+[*] GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+[*] Fri Jan 31 01:17:30 2020
+[*]
+[dumpfile] "/home/allen/Dropbox/Caesr/coherence/test_run_dir/PMSI_read_write_should_give_quadratic_bound/BareMemorySubsystem.vcd"
+[dumpfile_mtime] "Fri Jan 31 01:16:03 2020"
+[dumpfile_size] 6627174
+[savefile] "/home/allen/Dropbox/Caesr/coherence/configuration_bare_system.gtkw"
+[timestart] 0
+[size] 1853 1011
+[pos] -1 -1
+*-8.293817 269 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.BareMemorySubsystem.
+[treeopen] TOP.BareMemorySubsystem.memory.
+[treeopen] TOP.BareMemorySubsystem.memory.memory_controller.
+[treeopen] TOP.BareMemorySubsystem.memory.memory_controller.resp_buffers_0.
+[sst_width] 452
+[signals_width] 577
+[sst_expanded] 1
+[sst_vpaned_height] 296
+@200
+-Cache 0
+@28
+TOP.BareMemorySubsystem.memory.cache.io_bus_request_channel_ready
+TOP.BareMemorySubsystem.memory.cache.io_bus_request_channel_valid
+@22
+TOP.BareMemorySubsystem.memory.cache.io_bus_request_channel_bits_address[63:0]
+@200
+-Cache 1
+@28
+TOP.BareMemorySubsystem.memory.cache_1.io_core_request_channel_ready
+TOP.BareMemorySubsystem.memory.cache_1.io_core_request_channel_valid
+@2022
+^1 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/cc_states.txt
+TOP.BareMemorySubsystem.memory.cache_1.state_machine_io_cc_state[5:0]
+@28
+TOP.BareMemorySubsystem.memory.cache_1.io_bus_request_channel_ready
+@29
+TOP.BareMemorySubsystem.memory.cache_1.io_bus_request_channel_valid
+@22
+TOP.BareMemorySubsystem.memory.cache_1.io_bus_request_channel_bits_address[63:0]
+@2028
+^2 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/cache_rr.txt
+TOP.BareMemorySubsystem.memory.cache_1.rr_arbiter_inst_grant[1:0]
+@200
+-Cache 3
+@28
+TOP.BareMemorySubsystem.memory.cache_3.io_core_request_channel_ready
+TOP.BareMemorySubsystem.memory.cache_3.io_core_request_channel_valid
+@2022
+^1 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/cc_states.txt
+TOP.BareMemorySubsystem.memory.cache_3.state_machine_io_cc_state[5:0]
+@28
+TOP.BareMemorySubsystem.memory.cache_3.line_addr_reg[2:0]
+TOP.BareMemorySubsystem.memory.cache_3.io_snoop_request_channel_bits_requester_id[2:0]
+TOP.BareMemorySubsystem.memory.cache_3.io_snoop_request_channel_ready
+TOP.BareMemorySubsystem.memory.cache_3.io_snoop_request_channel_valid
+@22
+TOP.BareMemorySubsystem.memory.cache_3.io_snoop_request_channel_bits_address[63:0]
+@2022
+^3 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/cache_events.txt
+TOP.BareMemorySubsystem.memory.cache_3.event_encoder_io_cache_event[4:0]
+^4 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/pmsi.txt
+TOP.BareMemorySubsystem.memory.cache_3.cl_state[5:0]
+^4 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/pmsi.txt
+TOP.BareMemorySubsystem.memory.cache_3.state_machine_io_cache_state_line_addr[5:0]
+^4 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/pmsi.txt
+TOP.BareMemorySubsystem.memory.cache_3.state_machine_io_cache_line_next_state[5:0]
+@28
+TOP.BareMemorySubsystem.memory.cache_3.event_encoder_io_event_valid
+@200
+-BUS
+@24
+TOP.BareMemorySubsystem.memory.bus.last_tick_owner[1:0]
+@200
+-LLC
+@2022
+^5 /home/allen/Dropbox/Caesr/riscv-new/fpga/verif/scripts/llc_states.txt
+TOP.BareMemorySubsystem.memory.memory_controller.llc_state[3:0]
+@28
+TOP.BareMemorySubsystem.memory.memory_controller.hash_table_write_request_state[1:0]
+TOP.BareMemorySubsystem.memory.memory_controller.io_bus_request_channel_ready
+TOP.BareMemorySubsystem.memory.memory_controller.io_bus_request_channel_valid
+@24
+TOP.BareMemorySubsystem.memory.memory_controller.io_bus_request_channel_bits_requester_id[2:0]
+@22
+TOP.BareMemorySubsystem.memory.memory_controller.io_bus_request_channel_bits_address[63:0]
+@200
+-Response
+@28
+TOP.BareMemorySubsystem.memory.memory_controller.resp_buffers_0.io_q_enq_valid
+TOP.BareMemorySubsystem.memory.memory_controller.resp_buffers_1.io_q_enq_valid
+TOP.BareMemorySubsystem.memory.memory_controller.resp_buffers_2.io_q_enq_valid
+TOP.BareMemorySubsystem.memory.memory_controller.resp_buffers_3.io_q_enq_valid
+@22
+TOP.BareMemorySubsystem.memory.cache_3.io_snoop_request_channel_bits_address[63:0]
+[pattern_trace] 1
+[pattern_trace] 0

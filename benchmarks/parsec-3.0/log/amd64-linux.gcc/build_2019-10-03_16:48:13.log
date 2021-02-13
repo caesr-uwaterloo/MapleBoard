@@ -1,0 +1,56 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Oct 3 16:48:13 EDT 2019.
+[PARSEC] Packages to build:  splash2.raytrace
+
+[PARSEC] [========== Building package splash2.raytrace [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.raytrace ----------]
+[PARSEC] splash2.raytrace does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.raytrace ----------]
+[PARSEC] Copying source code of package splash2.raytrace.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread rt.H > rt.h
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread bbox.C > bbox.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  bbox.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread cr.C > cr.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  cr.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread env.C > env.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  env.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread fbuf.C > fbuf.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  fbuf.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread geo.C > geo.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  geo.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread huprn.C > huprn.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  huprn.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread husetup.C > husetup.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  husetup.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread hutv.C > hutv.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  hutv.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread isect.C > isect.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  isect.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread main.C > main.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  main.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread matrix.C > matrix.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  matrix.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread memory.C > memory.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  memory.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread poly.C > poly.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  poly.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread raystack.C > raystack.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  raystack.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread shade.C > shade.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  shade.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread sph.C > sph.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  sph.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread trace.C > trace.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  trace.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread tri.C > tri.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  tri.c
+m4 -Uindex -Ulen ../../../../null_macros/c.m4.null.pthread workpool.C > workpool.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  workpool.c
+/usr/bin/gcc bbox.o cr.o env.o fbuf.o geo.o huprn.o husetup.o hutv.o isect.o main.o matrix.o memory.o poly.o raystack.o shade.o sph.o trace.o tri.o workpool.o  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206  -O2 -w  -o raytrace -L/usr/lib64 -L/usr/lib -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/raytrace/inst/amd64-linux.gcc/bin
+cp -f raytrace /home/allen/parsec/parsec-3.0/ext/splash2/apps/raytrace/inst/amd64-linux.gcc/bin/raytrace
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/raytrace/inst/amd64-linux.gcc/bin/run.sh
+[PARSEC] Done.

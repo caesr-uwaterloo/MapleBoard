@@ -1,0 +1,14 @@
+0 Init
+1 Idle
+2 HashReadRequest
+3 HashReadResponse
+4 Resp
+5 NotFound
+6 AllocateQueue
+7 Deq
+8 Enq
+9 HashRemoveRequest
+A HashRemoveResponse
+B DeallocateQueue
+C HashWriteResponse
+D HashWriteRequest

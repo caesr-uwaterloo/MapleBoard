@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "ostream": "cpp"
+    },
+    "sync-rsync.flags": "Kavzh",
+    "sync-rsync.sites": [
+        {
+            "localPath": "/home/allen/Dropbox/Caesr/riscv-splash2/",
+            "remotePath": "xilinx@zcu102:~/riscv-splash2/"
+        },
+    ],
+    "sync-rsync.delete": true,
+    "sync-rsync.onSaveIndividual": true
+}

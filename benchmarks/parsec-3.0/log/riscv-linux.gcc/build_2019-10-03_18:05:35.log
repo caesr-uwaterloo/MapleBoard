@@ -1,0 +1,56 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Thu Oct 3 18:05:35 EDT 2019.
+[PARSEC] Packages to build:  splash2.barnes splash2.cholesky splash2.fft splash2.fmm splash2.lu_cb splash2.lu_ncb splash2.ocean_cp splash2.ocean_ncp splash2.radiosity splash2.radix splash2.raytrace splash2.volrend splash2.water_nsquared splash2.water_spatial
+
+[PARSEC] [========== Building package splash2.barnes [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.barnes ----------]
+[PARSEC] Package splash2.barnes already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.cholesky [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.cholesky ----------]
+[PARSEC] Package splash2.cholesky already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] Package splash2.fft already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.fmm [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fmm ----------]
+[PARSEC] Package splash2.fmm already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.lu_cb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_cb ----------]
+[PARSEC] Package splash2.lu_cb already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.lu_ncb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_ncb ----------]
+[PARSEC] Package splash2.lu_ncb already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.ocean_cp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_cp ----------]
+[PARSEC] Package splash2.ocean_cp already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.ocean_ncp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_ncp ----------]
+[PARSEC] Package splash2.ocean_ncp already exists, proceeding.
+
+[PARSEC] [========== Building package splash2.radiosity [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.radiosity ----------]
+[PARSEC] splash2.radiosity does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.radiosity ----------]
+[PARSEC] Copying source code of package splash2.radiosity.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread model.H > model.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread parallel.H > parallel.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread patch.H > patch.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread task.H > task.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread radiosity.H > radiosity.h
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread rad_main.C > rad_main.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g  rad_main.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread patchman.C > patchman.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g  patchman.c
+m4 -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread elemman.C > elemman.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -I./glibdumb -I./glibps -I/usr/local/include -g  elemman.c
+makefile:55: recipe for target 'elemman.o' failed
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

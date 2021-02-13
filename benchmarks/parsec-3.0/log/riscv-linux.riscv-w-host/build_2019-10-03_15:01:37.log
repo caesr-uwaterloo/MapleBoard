@@ -1,0 +1,8 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.riscv-w-host started on Thu Oct 3 15:01:37 EDT 2019.
+[PARSEC] Packages to build:  splash2.fft
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] Error: Cannot find local build configuration 'riscv-w-host.bldconf' for package splash2.fft.

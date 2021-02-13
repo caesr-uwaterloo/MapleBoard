@@ -1,0 +1,156 @@
+#!/bin/bash
+#
+# gcc.bldconf - file containing global information necessary to build
+#               PARSEC with gcc
+#
+# Copyright (C) 2006-2009 Princeton University
+# Written by Christian Bienia (Initial version)
+#            Christian Fensch (Sparc/Solaris port)
+
+# Compilation and linking options
+# These are the global options we'll use to build the benchmark suite. Each
+# package also has a local build configuration file defining the exact
+# arguments and environment to use.
+
+
+# Determine OS-specific paths and prefixes
+# We first determine the various directories typically used for the GNU
+# binaries, then we use that information to define the binary locations.
+# The values for Linux are at the end and also the default values.
+
+case "${OSTYPE}" in
+*solaris*)
+  # Solaris case
+
+  # Solaris-specific variables
+  # SFW_HOME is installation root of SFW (Solaris FreeWare)
+  export SFW_HOME="/usr/sfw"
+
+  # CC_HOME is installation root of the C compiler
+  export CC_HOME="/usr/local/gcc-4.2.4"
+  #export CC_HOME="/usr/sfw"
+  # BINUTIL_HOME is installation root of the GNU binutils
+  export BINUTIL_HOME="/usr/sfw"
+  # GNUTOOL_HOME is installation root of the GNU tools
+  export GNUTOOL_HOME="${SFW_HOME}"
+  # BINARY_PREFIX is the string which is used as prefix for the GNU binaries
+  export BINARY_PREFIX="g"
+;;
+*rv64linux*)
+  echo "Modified, using rv64linux"
+  export CC_HOME="/opt/riscv/"
+  export BINUTIL_HOME="/opt/riscv/"
+  export GNUTOOL_HOME="/usr"
+  export BINARY_PREFIX="riscv64-unknown-linux-gnu-"
+;;
+*)
+  # Linux + default case
+
+  # CC_HOME is installation root of the C compiler
+  export CC_HOME="/usr"
+  # BINUTIL_HOME is installation root of the GNU binutils
+  export BINUTIL_HOME="/usr"
+  # GNUTOOL_HOME is installation root of the GNU tools
+  export GNUTOOL_HOME="/usr"
+  # BINARY_PREFIX is the string which is used as prefix for the GNU binaries
+  export BINARY_PREFIX=""
+;;
+esac
+
+# Compilers and preprocessors
+export HOSTCC="gcc"
+export HOSTCXX="g++"
+export CC="${CC_HOME}/bin/${BINARY_PREFIX}gcc"
+export CXX="${CC_HOME}/bin/${BINARY_PREFIX}g++"
+export CPP="${CC_HOME}/bin/${BINARY_PREFIX}cpp"
+export CXXCPP=""
+
+
+# GNU Binutils
+export LD="${BINUTIL_HOME}/bin/${BINARY_PREFIX}ld"
+export AS="${BINUTIL_HOME}/bin/${BINARY_PREFIX}as"
+export AR="${BINUTIL_HOME}/bin/${BINARY_PREFIX}ar"
+export RANLIB="${BINUTIL_HOME}/bin/${BINARY_PREFIX}ranlib"
+export STRIP="${BINUTIL_HOME}/bin/${BINARY_PREFIX}strip"
+
+export HOSTLD="ld"
+export HOSTAS="as"
+export HOSTAR="ar"
+export HOSTRANLIB="ranlib"
+export HOSTSTRIP="strip"
+
+# GNU Tools
+export M4="${GNUTOOL_HOME}/bin/m4"
+export MAKE="${GNUTOOL_HOME}/bin/make"
+
+# Flags for increased portability of binaries
+PORTABILITY_FLAGS="-static-libgcc -Wl,--hash-style=both,--as-needed"
+
+# Arguments to use
+export CFLAGS=" -O3 -g -funroll-loops -fprefetch-loop-arrays ${PORTABILITY_FLAGS}"
+export CXXFLAGS="-O3 -g -funroll-loops -fprefetch-loop-arrays -fpermissive -fno-exceptions ${PORTABILITY_FLAGS}"
+export CPPFLAGS=""
+export CXXCPPFLAGS=""
+export LDFLAGS="-L${CC_HOME}/lib64 -L${CC_HOME}/lib"
+export LIBS=""
+export EXTRA_LIBS=""
+export PARMACS_MACRO_FILE="pthreads"
+
+export SPLASH2DIR="/home/allen/Dropbox/Caesr/riscv-splash2/"
+export BASEDIR="$SPLASH2DIR/splash2_benchmark/codes"
+export COMMONOBJ="start.o clone.o exit.o futex.o idle.o trap_vector.o intrinsics.o context.o"
+export COMMON=$(echo $COMMONOBJ | sed 's/[^ ]* */$BASEDIR\/..\/..\/utils\/&/g')
+
+
+# OS-specific arguments
+case "${OSTYPE}" in
+*solaris*)
+  CFLAGS="${CFLAGS} -I${SFW_HOME}/include"
+  CXXFLAGS="${CXXFLAGS} -I${SFW_HOME}/include"
+  LDFLAGS="${LDFLAGS} -L${SFW_HOME}/lib"
+  ;;
+*rv64linux*)
+  CFLAGS="-Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g" 
+  CFLAGS="${CFLAGS} -w -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization"
+  CFLAGS="${CFLAGS} -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels"
+  # add necessary runtime environment for riscv
+
+  # RISC-V flfags
+  CFLAGS="${CFLAGS} ${COMMON} -Wl,-T${BASEDIR}/../../utils/link.ld"
+  CFLAGS="${CFLAGS} -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start"
+  LDFLAGS="${LDFLAGS}"
+  ;;
+esac
+
+# Add PARSEC version to compiler flags
+if [ -f "${PARSECDIR}/version" ]; then
+  CFLAGS="${CFLAGS} -DPARSEC_VERSION=$(${CAT} ${PARSECDIR}/version)"
+  CXXFLAGS="${CXXFLAGS} -DPARSEC_VERSION=$(${CAT} ${PARSECDIR}/version)"
+fi
+
+# Java
+export JAVA_HOME="/usr"
+export JAVAC="${JAVA_HOME}/bin/javac"
+
+# Version numbers
+if [ -x ${CC} ]; then
+  CC_ver=$(${CC} --version)
+else
+  CC_ver=""
+fi
+if [ -x ${CXX} ]; then
+  CXX_ver=$(${CXX} --version)
+else
+  CXX_ver=""
+fi
+if [ -x ${LD} ]; then
+  LD_ver=$(${LD} --version)
+else
+  LD_ver=""
+fi
+if [ -x ${JAVAC} ]; then
+  JAVAC_ver=$(${JAVAC} -version 2>&1)
+else
+  JAVAC_ver=""
+fi
+

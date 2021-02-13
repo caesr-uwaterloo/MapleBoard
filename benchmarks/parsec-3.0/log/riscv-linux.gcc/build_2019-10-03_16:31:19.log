@@ -1,0 +1,13 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Thu Oct 3 16:31:19 EDT 2019.
+[PARSEC] Packages to build:  splash2.fft
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] splash2.fft does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.fft ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.fft.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

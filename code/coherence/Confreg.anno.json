@@ -1,0 +1,46 @@
+[
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Confreg|Confreg>s_axi_arready",
+    "sources":[
+      "~Confreg|Confreg>s_axi_awvalid"
+    ]
+  },
+  {
+    "class":"logger.LogLevelAnnotation",
+    "globalLogLevel":{
+      
+    }
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.VerilogEmitter"
+  },
+  {
+    "class":"chisel3.experimental.EnumAnnotations$EnumDefAnnotation",
+    "typeName":"utils.Confreg",
+    "definition":{
+      "idle":0,
+      "w":1,
+      "r":2,
+      "b":3
+    }
+  },
+  {
+    "class":"chisel3.experimental.EnumAnnotations$EnumComponentAnnotation",
+    "target":"Confreg.Confreg.state",
+    "enumTypeName":"utils.Confreg"
+  },
+  {
+    "class":"firrtl.options.TargetDirAnnotation",
+    "directory":"."
+  },
+  {
+    "class":"firrtl.options.OutputAnnotationFileAnnotation",
+    "file":"Confreg"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"."
+  }
+]

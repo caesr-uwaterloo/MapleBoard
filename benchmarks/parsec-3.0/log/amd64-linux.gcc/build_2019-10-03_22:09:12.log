@@ -1,0 +1,21 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Oct 3 22:09:12 EDT 2019.
+[PARSEC] Packages to build:  splash2.fft
+
+[PARSEC] [========== Building package splash2.fft [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fft ----------]
+[PARSEC] splash2.fft does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.fft ----------]
+[PARSEC] Copying source code of package splash2.fft.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread fft.C > fft.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w fft.c
+echo HI
+HI
+/usr/bin/gcc fft.o  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w -o fft -L/usr/lib64 -L/usr/lib -lpthread -lm
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/kernels/fft/inst/amd64-linux.gcc/bin
+cp -f fft /home/allen/parsec/parsec-3.0/ext/splash2/kernels/fft/inst/amd64-linux.gcc/bin/fft
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/kernels/fft/inst/amd64-linux.gcc/bin/run.sh
+[PARSEC] Done.

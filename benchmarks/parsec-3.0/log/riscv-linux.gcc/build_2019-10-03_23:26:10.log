@@ -1,0 +1,24 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Thu Oct 3 23:26:10 EDT 2019.
+[PARSEC] Packages to build:  splash2.fmm
+
+[PARSEC] [========== Building package splash2.fmm [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fmm ----------]
+[PARSEC] splash2.fmm does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.fmm ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.fmm.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread defs.H > defs.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread defs.C > defs.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread particle.H > particle.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread box.H > box.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread memory.H > memory.h
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   defs.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread memory.C > memory.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   memory.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread particle.C > particle.c
+/opt/riscv//bin/riscv64-unknown-linux-gnu-gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   particle.c
+makefile:39: recipe for target 'particle.o' failed
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

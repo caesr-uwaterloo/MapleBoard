@@ -1,0 +1,9 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Apr 30 14:20:39 EDT 2020.
+[PARSEC] Packages to build:  splash2.radiosity
+
+[PARSEC] [========== Building package splash2.radiosity [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.radiosity ----------]
+[PARSEC] Package splash2.radiosity already exists, proceeding.
+[PARSEC] Done.

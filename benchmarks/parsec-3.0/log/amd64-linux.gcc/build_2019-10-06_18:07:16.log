@@ -1,0 +1,27 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Sun Oct 6 18:07:16 EDT 2019.
+[PARSEC] Packages to build:  splash2.water_spatial
+
+[PARSEC] [========== Building package splash2.water_spatial [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.water_spatial ----------]
+[PARSEC] splash2.water_spatial does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.water_spatial ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.water_spatial.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread parameters.H > parameters.h
+m4 ../../../../null_macros/c.m4.null.pthread mdvar.H > mdvar.h
+m4 ../../../../null_macros/c.m4.null.pthread water.H > water.h
+m4 ../../../../null_macros/c.m4.null.pthread wwpot.H > wwpot.h
+m4 ../../../../null_macros/c.m4.null.pthread cnst.H > cnst.h
+m4 ../../../../null_macros/c.m4.null.pthread mddata.H > mddata.h
+m4 ../../../../null_macros/c.m4.null.pthread fileio.H > fileio.h
+m4 ../../../../null_macros/c.m4.null.pthread frcnst.H > frcnst.h
+m4 ../../../../null_macros/c.m4.null.pthread randno.H > randno.h
+m4 ../../../../null_macros/c.m4.null.pthread global.H > global.h
+m4 ../../../../null_macros/c.m4.null.pthread split.H > split.h
+m4 ../../../../null_macros/c.m4.null.pthread water.C > water.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  water.c
+makefile:27: recipe for target 'water.o' failed
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

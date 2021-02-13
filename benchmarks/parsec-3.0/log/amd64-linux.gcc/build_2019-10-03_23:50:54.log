@@ -1,0 +1,36 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build amd64-linux.gcc started on Thu Oct 3 23:50:54 EDT 2019.
+[PARSEC] Packages to build:  splash2.ocean_cp
+
+[PARSEC] [========== Building package splash2.ocean_cp [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.ocean_cp ----------]
+[PARSEC] splash2.ocean_cp does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.ocean_cp ----------]
+[PARSEC] Copying source code of package splash2.ocean_cp.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread decs.H > decs.h
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread main.C > main.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   main.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread jacobcalc.C > jacobcalc.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   jacobcalc.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread jacobcalc2.C > jacobcalc2.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   jacobcalc2.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread laplacalc.C > laplacalc.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   laplacalc.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread slave1.C > slave1.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   slave1.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread slave2.C > slave2.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   slave2.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread multi.C > multi.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   multi.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread linkup.C > linkup.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   linkup.c
+m4 -s -Ulen -Uindex ../../../../null_macros/c.m4.null.pthread subblock.C > subblock.c
+/usr/bin/gcc -c  -O3 -g -funroll-loops -fprefetch-loop-arrays -static-libgcc -Wl,--hash-style=both,--as-needed -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w   subblock.c
+/usr/bin/gcc main.o jacobcalc.o jacobcalc2.o laplacalc.o slave1.o slave2.o multi.o linkup.o subblock.o  -o ocean_cp -L/usr/lib64 -L/usr/lib -lpthread -lm 
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make install':
+mkdir -p /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_cp/inst/amd64-linux.gcc/bin
+cp -f ocean_cp /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_cp/inst/amd64-linux.gcc/bin/ocean_cp
+cp -f run.sh /home/allen/parsec/parsec-3.0/ext/splash2/apps/ocean_cp/inst/amd64-linux.gcc/bin/run.sh
+[PARSEC] Done.

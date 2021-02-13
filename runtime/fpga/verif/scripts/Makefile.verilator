@@ -1,0 +1,25 @@
+
+# whether output the log
+SIM_LOG ?= 1
+RT = Vtb
+VERILATOR_CFLAGS=-DVERILATOR -I$(FPGA_ROOT)/design/chisel3-verilog -DSIM_LOG=$(SIM_LOG) -g
+
+compile:
+	mkdir -p $(SIM_DIR)
+	verilator --Mdir $(SIM_DIR) \
+		-DPRINTF_COND=$(SIM_LOG) \
+		-CFLAGS "$(VERILATOR_CFLAGS) $(CXXFLAGS)" \
+		+1800-2017ext+sv \
+		-LDFLAGS "-lpthread -ldl" \
+		-sv \
+		--top-module tb \
+		--clk tb.clk \
+		--cc $(V_SRC) \
+		--exe $(CXX_SRC) \
+		--trace \
+		--trace-depth 99
+	make -C $(SIM_DIR) -j -f Vtb.mk Vtb
+
+run: compile
+	unset LS_COLORS
+	$(SIM_DIR)/$(RT) -m $(MEM_SIZE) $(ELF_PATH)

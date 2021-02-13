@@ -1,0 +1,9 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Mon Apr 13 14:19:42 EDT 2020.
+[PARSEC] Packages to build:  splash2.fmm
+
+[PARSEC] [========== Building package splash2.fmm [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.fmm ----------]
+[PARSEC] Package splash2.fmm already exists, proceeding.
+[PARSEC] Done.

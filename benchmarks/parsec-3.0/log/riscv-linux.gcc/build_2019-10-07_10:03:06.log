@@ -1,0 +1,27 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Mon Oct 7 10:03:06 EDT 2019.
+[PARSEC] Packages to build:  splash2.water_spatial
+
+[PARSEC] [========== Building package splash2.water_spatial [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.water_spatial ----------]
+[PARSEC] splash2.water_spatial does not depend on any other packages.
+[PARSEC] [---------- Building package splash2.water_spatial ----------]
+[PARSEC] Removing old build directory.
+[PARSEC] Copying source code of package splash2.water_spatial.
+[PARSEC] Running 'env version=IN_PARSEC /usr/bin/make':
+m4 ../../../../null_macros/c.m4.null.pthread parameters.H > parameters.h
+m4 ../../../../null_macros/c.m4.null.pthread mdvar.H > mdvar.h
+m4 ../../../../null_macros/c.m4.null.pthread water.H > water.h
+m4 ../../../../null_macros/c.m4.null.pthread wwpot.H > wwpot.h
+m4 ../../../../null_macros/c.m4.null.pthread cnst.H > cnst.h
+m4 ../../../../null_macros/c.m4.null.pthread mddata.H > mddata.h
+m4 ../../../../null_macros/c.m4.null.pthread fileio.H > fileio.h
+m4 ../../../../null_macros/c.m4.null.pthread frcnst.H > frcnst.h
+m4 ../../../../null_macros/c.m4.null.pthread randno.H > randno.h
+m4 ../../../../null_macros/c.m4.null.pthread global.H > global.h
+m4 ../../../../null_macros/c.m4.null.pthread split.H > split.h
+m4 ../../../../null_macros/c.m4.null.pthread water.C > water.c
+gcc -c -Os -static -march=rv64ia -mabi=lp64 -pthread -D_POSIX_C_SOURCE=200112 -g -W -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wdisabled-optimization -Wpadded -Winline -Wpointer-arith -Wsign-compare -Wendif-labels $BASEDIR/../../utils/start.o $BASEDIR/../../utils/clone.o $BASEDIR/../../utils/exit.o $BASEDIR/../../utils/futex.o $BASEDIR/../../utils/idle.o $BASEDIR/../../utils/trap_vector.o $BASEDIR/../../utils/intrinsics.o $BASEDIR/../../utils/context.o -Wl,-T/home/allen/Dropbox/Caesr/riscv-splash2//splash2_benchmark/codes/../../utils/link.ld -fno-stack-protector -Wl,-z,norelro  -Wl,-e__start -DPARSEC_VERSION=3.0-beta-20150206 -O2 -w  water.c
+makefile:27: recipe for target 'water.o' failed
+[PARSEC] Error: 'env version=IN_PARSEC /usr/bin/make' failed.

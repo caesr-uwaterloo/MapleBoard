@@ -1,0 +1,21 @@
+CORES ?= 2
+LINES ?= 16
+PROTO ?= pmsi
+BUS   ?= dedicated
+FREQ  ?= 100mhz
+OUTPUT_FOLDER ?= /home/$(USER)/mount/syn-new/
+CONFSTR := $(PROTO).$(CORES)c.$(LINES).$(BUS)
+SRC_FOLDER    ?= /home/$(USER)/working/scala-deployment/coherence/$(CONFSTR)
+
+$(SRC_FOLDER)/VU9PTop.v:
+	cd $(SRC_FOLDER)/.. && sbt "runMain utils.VU9PTop --core $(CORES) --line $(LINES) --protocol $(PROTO) --bus $(BUS)"
+
+$(OUTPUT_FOLDER)/build.$(CONFSTR).$(FREQ)/top.bit: $(SRC_FOLDER)/VU9PTop.v
+	vivado -mode batch -source loopback.tcl -tclargs $(CORES) $(LINES) $(PROTO) $(BUS)
+
+$(OUTPUT_FOLDER)/build.$(CONFSTR).$(FREQ)/build.$(CONFSTR).$(FREQ).rpt: # $(OUTPUT_FOLDER)/build.$(CONFSTR).$(FREQ)/top.bit
+	cd $(OUTPUT_FOLDER)/build.$(CONFSTR).$(FREQ)/ && vivado -mode batch -source /home/$(USER)/working/playground/vivado/syn-flow-no-ila/report_utilization.tcl
+
+all: $(OUTPUT_FOLDER)/build.$(CONFSTR).$(FREQ)/top.bit
+
+report: $(OUTPUT_FOLDER)/build.$(CONFSTR).$(FREQ)/build.$(CONFSTR).$(FREQ).rpt

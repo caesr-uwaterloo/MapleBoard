@@ -1,0 +1,358 @@
+#include "env.h"
+
+
+  .section .text.init;
+  .globl __start;
+  .globl main;
+__start:
+
+  j reset_vector;
+  .align 2;
+
+trap_vector:
+  /* store the registers */
+  // NOTE: according to this threads: https://groups.google.com/a/groups.riscv.org/forum/#!topic/isa-dev/4Iap3Z1kUdk
+  // no register is free to use across the OS boundary, so we need to store and restore all the registers
+  // by ourselves.
+  addi sp, sp, -4;
+  sw  t0, 0(sp);
+  addi sp, sp, -4;
+  sw  t1, 0(sp);
+
+  csrr t1, mhartid
+  la t0, kernel_register_save;
+  slli t1, t1, 7;
+  add t0, t0, t1; // now t0 is the space for storing registers
+  lw t1, 0(sp);
+  addi sp, sp, 8; // restore sp
+  SAVE_REG_T0;
+  // restore the value of t0 from stack
+  // This could be a problem if this goes beyond the stack of the caller and pollutes the data of another thread/area, but it might be ok for now.
+  lw t1, -4(sp);
+  sw t1, 20(t0); 
+  // we are safe from now on
+  // just remember to restore the content
+ 
+  // setup kernel stack
+  csrr t1, mhartid
+  la sp, kernel_stack;
+  slli t1, t1, 13;
+  add sp, sp, t1;
+  
+
+
+  csrr t5, mcause;
+  li t6, CAUSE_USER_ECALL;
+  beq t5, t6, wait_for_ecall;
+  li t6, CAUSE_SUPERVISOR_ECALL;
+  beq t5, t6, wait_for_ecall;
+  li t6, CAUSE_MACHINE_ECALL;
+  beq t5, t6, wait_for_ecall;
+  nop;
+  nop;
+  nop;
+  nop;
+  nop;
+
+handle_exception:
+  // no mechanism for handling the exception
+other_exception:
+  j other_exception;
+wait_for_ecall:
+/* flush the register values into corresponding private memory location */
+  csrr t1, mhartid;
+  slli t1, t1, 6;
+  la t0, syscallargs
+  add t1, t1, t0;
+  sw a0, 0(t1);
+  sw a1, 4(t1);
+  sw a2, 8(t1);
+  sw a3,12(t1);
+  sw a4,16(t1);
+  sw a5,20(t1);
+  sw a6,24(t1);
+  sw a7,28(t1);
+
+  li t3, 16;
+  li t2, 64;
+  la t1, hole_end; # an arbitrary address that we do not use
+  addi t1, t1, -4;
+  lw zero, 0(t1);
+1:
+  sub t1, t1, t2;
+  addi t3, t3, -1;
+  lw zero, 0(t1);
+  bnez t3, 1b;
+
+  // Now the cache line is flushed, we need to send a signal to the host
+
+
+  // we might need instructions / mechanisms for flush the cache here
+  // How to handle return value?
+  // save return address register
+  mv t6, ra;
+
+  li t0, NR_clone;
+  bne t0, a7, 1f;
+  jal __clone_rt;
+  j ret_from_ecall;
+1:
+  li t0, NR_set_tid_address;
+  bne t0, a7, 1f;
+  jal __set_tid_address;
+  j ret_from_ecall;
+1:
+  li t0, NR_futex;
+  bne t0, a7, 1f;
+  jal __futex_rt;
+  j ret_from_ecall;
+1:
+  li t0, NR_exit;
+  bne t0, a7, 1f;
+  j __exit_rt; // exit will never return
+1:
+  li t0, NR_exit_group;
+  bne t0, a7, 1f;
+  j __exit_rt; // exit will never return
+1:
+  // here we only notify the host for necessary system calls
+  POKE_ADDR(tohost, 1, t0, t1, t2);
+
+  // we wait until the host acknowledge the request
+1:
+  PEEK_ADDR(tohost, t0, t1);
+  bnez t0, 1b;
+
+1:
+  PEEK_ADDR(fromhost, t0, t1);
+  beqz t0, 1b;
+  
+  // now the host replies with correct values
+  lw a0, 4(t1);
+
+  // host is waiting for the acknowledge signal
+  POKE_ADDR(fromhost, 0, t0, t1, t2);
+
+  la t0, fromhost;
+/*
+  csrr t1, mhartid;
+  slli t1, t1, 6;
+  add t0, t0, t1; // get the the right position of fromhost
+  # this value ensures that the cacheline is evicted and brought back to private/shared cache
+  # the set up is 16 * 64 bytes of private cache and 32 * 64 bytes of shared cache
+1:
+  lw t1, 1024(t0); 
+  lw t1, 0(t0);
+  beq t1, zero, 1b;
+  # now the host replies with the correct values
+  # TODO: we don't need this, should be remoevd
+  sw zero, 0(t0);
+  lw a0, 4(t0);
+
+  la t2, tohost;
+  csrr t3, mhartid;
+  slli t3, t3, 6;
+  add t2, t2, t3;
+  sw x0, 0(t2);
+  lw t4, -1024(t2); // flush the line
+*/
+  # now we get the exception return from the ecall
+ret_from_ecall:
+  // load return address register
+
+  mv ra, t6;
+
+  csrr t0, mepc;
+  addi t0, t0, 4;
+  csrw mepc, t0;
+
+  csrr t1, mhartid
+  la t0, kernel_register_save;
+  slli t1, t1, 7;
+  add t0, t0, t1; // now t0 is the space for storing registers
+  lw x4, 16(t0);
+  lw x2, 8(t0);
+  sw a0, 40(t0); // set the return value correctly in the saved values
+  RESTORE_REG_T0;
+  mret;
+
+reset_vector:
+// start testing
+/*
+  li t3, 60;
+1:
+  la t0, kernel_lock;
+  li t2, 1;
+  lr.w t1, 0(t0);
+  bnez t1, 1b;
+  sc.w t2, t2, 0(t0);
+  bnez t2, 1b;
+
+  la t4, critical;
+  lw t5, 0(t4);
+  addi t5, t5, 1;
+  sw t5, 0(t4);
+
+  amoswap.w zero, zero, 0(t0);
+  addi t3, t3, -1;
+  bnez t3, 1b;
+
+  csrr t0, mhartid;
+  bnez t0, 1f;
+  
+1:
+  beqz zero, 1b; // loop
+*/
+// end testing
+
+  DELEGATE_NO_TRAPS;                    
+  la t0, trap_vector;                   
+  csrw mtvec, t0;                       
+1:csrwi mstatus, 0;
+  RVTEST_ENABLE_MACHINE;
+  RISCV_MULTICORE_ENABLE;
+  la t0, thread_mask;
+  la t1, 1;
+  sw t1, (t0);
+  /* here is the start of the true program, could be main, or the c runtime */
+  la t0, _start; #main;
+  csrw mepc, t0;
+  csrr a0, mhartid;
+  /* load the stack pointer properly */
+  la sp, fromhost
+  lw sp, 0(sp);
+  lw t0, 0(sp);
+  la t0, fromhost;
+  sw zero, 0(t0);
+  /* setup the tls */
+  la tp, __tdata_start;
+  /* FIX???
+   */
+  lw t0, 4(tp);
+  la t0, _dl_random;
+  la t1, at_random;
+  sw t1, 0(t0);
+  /* TODO: we need to add support for environmental variables at this point...*/
+  mret;
+
+// int futex(int *uaddr, int futex_op, int val,
+//     const struct timespec *timeout, < or: uint32_t val2 >
+//     int *uaddr2, int val3);
+.global __futex_rt;
+__futex_rt:
+  bnez a0, 1f;
+  li a7, 3;
+  ecall;
+1:
+  addi sp, sp, -4;
+  sw ra, 0(sp);
+ /*
+  csrr t1, mhartid
+  la t0, kernel_register_save;
+  slli t1, t1, 3;
+  add t0, t0, t1;
+  slli t1, t1, 2;
+  add t0, t0, t1;
+  FUNC_CALL_SAVE_REGS_T0_NO_A0;
+*/
+  call futex;
+/*
+  csrr t1, mhartid
+  la t0, kernel_register_save;
+  slli t1, t1, 3;
+  add t0, t0, t1;
+  slli t1, t1, 2;
+  add t0, t0, t1;
+  FUNC_CALL_RESTORE_REGS_T0_NO_A0;
+*/
+  lw ra, 0(sp);
+  addi sp, sp, 4;
+  ret;
+
+/* skip by a line */
+.balign 64;
+.pushsection .syscallargs,"aw",@progbits;
+.global syscallargs
+syscallargs:
+  .skip 64;
+  .skip 64;
+  .skip 64;
+  .skip 64;
+
+// TODO: data segment
+.balign 64;
+.pushsection .tohost,"aw",@progbits;
+.global tohost;
+tohost:
+  .skip 64;
+  .skip 64;
+  .skip 64;
+  .skip 64;
+
+.balign 64;
+.pushsection .fromhost,"aw",@progbits;
+.global fromhost;
+fromhost:
+  .skip 64; // indicating when the syscall is done
+  .skip 64; // return value of the system call
+  .skip 64;
+  .skip 64;
+
+.balign 64;
+.global clear_child_tid;
+clear_child_tid: // more space for futher extension of # of cores
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+
+.global kernel_lock;
+kernel_lock:
+  .dword 0;
+.global critical;
+critical:
+  .dword 0;
+.global at_random;
+at_random: // 16-bytes of random value
+  .space 16
+
+.global kernel_stack;
+kernel_stack:
+  .space 8192;
+  .space 8192;
+  .space 8192;
+  .space 8192;
+
+# used to flush the cache
+.balign 1024
+hole_start:
+  .space 8192;
+hole_end:
+
+aux:
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+  .dword 0;
+
+.pushsection .kernel_register_save, "aw", @progbits
+.global kernel_register_save
+kernel_register_save:
+  .skip 128;
+  .skip 128;
+  .skip 128;
+  .skip 128;
+
+# recording the number of cores available
+.pushsection .kernel_register_save, "aw", @progbits
+.global ncore
+ncore:
+  .dword 0;

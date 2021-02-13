@@ -1,0 +1,12 @@
+/bin/
+/project/target
+/project/project
+/target/
+
+.project
+.classpath
+.settings
+.idea
+*.iml
+
+/test_run_dir/

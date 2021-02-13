@@ -1,0 +1,9 @@
+[PARSEC] [========== PARSEC 3.0-beta-20150206 BUILD LOGFILE ==========]
+
+[PARSEC] Build riscv-linux.gcc started on Sat Apr 11 12:32:46 EDT 2020.
+[PARSEC] Packages to build:  splash2.lu_cb
+
+[PARSEC] [========== Building package splash2.lu_cb [1] ==========]
+[PARSEC] [---------- Analyzing package splash2.lu_cb ----------]
+[PARSEC] Package splash2.lu_cb already exists, proceeding.
+[PARSEC] Done.

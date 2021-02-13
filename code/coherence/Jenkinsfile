@@ -1,0 +1,15 @@
+pipeline {
+  agent { 
+    docker { 
+      image 'hseeberger/scala-sbt' 
+      args '-u root:sudo'
+    } 
+  }
+  stages {
+    stage('build') {
+      steps {
+        sh './build.sh'
+      }
+    }
+  }
+}
