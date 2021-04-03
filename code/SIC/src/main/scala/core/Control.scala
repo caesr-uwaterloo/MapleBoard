@@ -103,7 +103,7 @@ object StageInterface {
   def apply(coreParam: CoreParam): StageInterface = new StageInterface(coreParam)
 }
 /**
-  *  One stage pipelined stage interface, only clock the data when input is valid and next stage is ready
+  *  Two-stage pipelined stage interface, only clock the data when input is valid and next stage is ready
   */
 class StageInterface(private val coreParam: CoreParam) extends Module {
   val io = IO(new Bundle {
