@@ -112,13 +112,17 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
   })
   val control = Reg(new Control(coreParam))
   val data = Reg(new DataPath(coreParam))
+  val valid = Reg(Bool())
   // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
   // TODO: combine the two decoupled interfaces into one
   when (io.in.control.valid && io.out.control.ready) {
-    control := io.in.control
-    data := io.in.data
+    control := io.in.control.bits
+    data := io.in.data.bits
   }
+  valid := io.in.control.valid && io.out.control.ready
 
-  io.out.control := control
-  io.out.data := data
+  io.out.control.bits := control
+  io.out.data.bits := data
+  io.out.control.valid := valid
+  io.out.data.valid := valid
 }
