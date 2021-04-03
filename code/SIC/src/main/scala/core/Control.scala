@@ -102,10 +102,23 @@ class StageInterfaceIO(private val coreParam: CoreParam) extends Bundle {
 object StageInterface {
   def apply(coreParam: CoreParam): StageInterface = new StageInterface(coreParam)
 }
+/**
+  *  One stage pipelined stage interface, only clock the data when input is valid and next stage is ready
+  */
 class StageInterface(private val coreParam: CoreParam) extends Module {
   val io = IO(new Bundle {
     val in = Flipped(new StageInterfaceIO(coreParam))
     val out = new StageInterfaceIO(coreParam)
   })
-  io.in <> io.out
+  val control = Reg(new Control(coreParam))
+  val data = Reg(new DataPath(coreParam))
+  // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
+  // TODO: combine the two decoupled interfaces into one
+  when (io.in.control.valid && io.out.control.ready) {
+    control := io.in.control
+    data := io.in.data
+  }
+
+  io.out.control := control
+  io.out.data := data
 }

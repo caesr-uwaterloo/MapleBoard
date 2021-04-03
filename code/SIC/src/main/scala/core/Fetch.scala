@@ -65,7 +65,7 @@ class FetchIO(private val coreParam: CoreParam) extends Bundle {
 
 /**
   *  The Fetch module accepts the address of next pc and issue the request to ICache
-  *  Note that when the reamining pipelines are not able to consume the the current instruction,
+  *  Note that when the remaining pipelines are not able to consume the the current instruction,
   *  the module is stalled
   *  Currently, no mechanism for killing or ignoring pending instructions is implemented, so speculative
   *  fetch will not work
