@@ -37,6 +37,7 @@ class Core(coreParam: CoreParam) extends Module {
   private val writeBack = Module(new WriteBack(coreParam))
   private val registerFile = Module(new RegisterFile(isaParam))
   private val csr = Module(new CSR(coreParam))
+  private val bypass = Module(new Bypass(coreParam))
 
   // Wires
   private val pcPlus4 = fetch.io.fetchResp.bits.pc
@@ -83,6 +84,9 @@ class Core(coreParam: CoreParam) extends Module {
   execute.io.controlInput <> dxInterface.io.out.control
   execute.io.dataInput <> dxInterface.io.out.data
 
+  execute.io.dataInput.bits.regData1 := bypass.io.out.regData1  // bypass connection
+  execute.io.dataInput.bits.regData2 := bypass.io.out.regData2  // bypass connection
+
   execute.io.controlOutput <> xmInterface.io.in.control
   execute.io.dataOutput <> xmInterface.io.in.data
 
@@ -93,6 +97,8 @@ class Core(coreParam: CoreParam) extends Module {
   memory.io.dataOutput <> mwInterface.io.in.data
   memory.io.dCacheReq <> io.dCacheReq
   memory.io.dCacheResp <> io.dCacheResp
+
+  memory.io.dataInput.bits.memoryData := bypass.io.out.memData  // bypass connection
 
   // WriteBack
   writeBack.io.controlInput <> mwInterface.io.out.control
@@ -120,6 +126,22 @@ class Core(coreParam: CoreParam) extends Module {
   writeBack.io.controlOutput.ready := fetch.io.fetchReq.ready
   writeBack.io.dataOutput.ready := fetch.io.fetchReq.ready
   csr.io.ctrl.exception := writeBack.io.controlOutput.bits.exception
+
+  // Bypass
+  // data input
+  bypass.io.in.regData1 := registerFile.io.rdata1
+  bypass.io.in.regData2 := registerFile.io.rdata2
+  bypass.io.in.aluData := xmInterface.io.out.data.bits.aluData
+  bypass.io.in.memData := xmInterface.io.out.data.bits.memoryData
+  bypass.io.in.writeData := registerFile.io.wdata
+  // control input
+  bypass.io.in.raddr1_E := registerFile.io.raddr1
+  bypass.io.in.raddr2_E := registerFile.io.raddr2
+  bypass.io.in.waddr_M := xmInterface.io.out.control.bits.waddr
+  bypass.io.in.wen_M := xmInterface.io.out.control.bits.wen
+  bypass.io.in.waddr_W := mwInterface.io.out.control.bits.waddr
+  bypass.io.in.wen_W := registerFile.io.wen
+  bypass.io.in.raddr2_M := xmInterface.io.out.control.bits.raddr2
 
   /** todo why optimized out? **/
   val irq = dontTouch(io.irq)
