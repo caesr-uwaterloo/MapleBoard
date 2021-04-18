@@ -92,6 +92,11 @@ class Control(private val coreParam: CoreParam) extends Bundle {
   // branches
   val branchTaken = Bool()
   val branchType = BranchType()
+
+  // for stalling control
+  val has_rs1 = Bool()
+  val has_rs2 = Bool()
+  val has_rd = Bool()
 }
 
 
@@ -125,4 +130,6 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
   io.out.data.bits := data
   io.out.control.valid := valid
   io.out.data.valid := valid
+
+  // TODO: if next stage is ready but the previous stage is not valid, pass NOP data and control to next stage
 }

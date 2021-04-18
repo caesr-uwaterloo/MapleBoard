@@ -114,6 +114,7 @@ class Decode(coreParam: CoreParam) extends Module {
   private val insnDecomp = Module(new InstructionField(coreParam))
   private val decodeTable: List[(BitPat, DecodeVector)] = List(
     // TODO: InstructionType may be inferred from the generated file
+    // TODO: add has_rs1, has_rs2, and has_rd to DecodeVector and populates them in Control for stalling logic
     (Instructions.AUIPC,  DecodeVector(ControlTransferType.none, BranchType.none, N, N, ALUOP.add,   InstructionType.U, N, CSROP.nop,   Y, CSRSourceSel.reg,  MemoryRequestType.read, AMOOP.none, In1Sel.pc, In2Sel.imm)),
     (Instructions.LUI,    DecodeVector(ControlTransferType.none, BranchType.none, N, Y, ALUOP.in2,   InstructionType.U, N, CSROP.nop,   Y, CSRSourceSel.reg,  MemoryRequestType.read, AMOOP.none, In1Sel.reg, In2Sel.imm)),
 
