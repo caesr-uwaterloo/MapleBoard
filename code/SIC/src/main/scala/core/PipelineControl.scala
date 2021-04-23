@@ -3,33 +3,31 @@ package core
 
 import chisel3._
 import chisel3.util._
+import chisel3.experimental._
+import riscv.Instructions
 
 import param.CoreParam
 
 class PipelineControlInput(private val coreParam: CoreParam) extends Bundle {
   private val isaParam = coreParam.isaParam
 
-  val has_rs1_D = Bool()
-  val has_rs2_D = Bool()
-  val has_rd_E = Bool()
-  val has_rd_M = Bool()
-  val has_rd_W = Bool()
+  val inst_F = UInt(isaParam.XLEN.W)
+  val control_D = new Control(coreParam)
+  val control_X = new Control(coreParam)
+  val control_M = new Control(coreParam)
+  val control_W = new Control(coreParam)
 
-  val raddr1_D = UInt(log2Ceil(isaParam.registerCount).W)
-  val raddr2_D = UInt(log2Ceil(isaParam.registerCount).W)
-  val waddr_E = UInt(log2Ceil(isaParam.registerCount).W)
-  val waddr_M = UInt(log2Ceil(isaParam.registerCount).W)
-  val waddr_W = UInt(log2Ceil(isaParam.registerCount).W)
-  val inst_E_is_load = Bool()
-  val inst_D_is_store = Bool()
-  val inst_D_is_branch = Bool()
-  val inst_E_is_branch = Bool()
+  //val dcache_hit = Bool()
+  //val icache_hit = Bool()
 }
 
 class PipelineControlOutput(private val coreParam: CoreParam) extends Bundle {
   private val isaParam = coreParam.isaParam
 
-  val stall_FD = Bool()
+  // signal <state>_ready means instruction in <state> is ready to enter the next state
+  val pre_ready = Bool()
+  val fetch_ready = Bool()
+  val decode_ready = Bool()
 }
 
 class PipelineControl(private val coreParam: CoreParam) extends Module {
@@ -38,31 +36,64 @@ class PipelineControl(private val coreParam: CoreParam) extends Module {
     val out = Output(new PipelineControlOutput(coreParam))
   })
 
+  private val has_rs1_D = hasRs1(io.in.control_D.instructionType)
+  private val has_rs2_D = hasRs2(io.in.control_D.instructionType)
+  private val has_rd_X = hasRd(io.in.control_X.instructionType)
+  private val has_rd_M = hasRd(io.in.control_M.instructionType)
+  private val has_rd_W = hasRd(io.in.control_W.instructionType)
+  private val raddr1_D = io.in.control_D.raddr1
+  private val raddr2_D = io.in.control_D.raddr2
+  private val waddr_X = io.in.control_X.waddr
+  private val waddr_M = io.in.control_M.waddr
+  private val waddr_W = io.in.control_W.waddr
+  private val inst_X_is_load = io.in.control_X.isMemory && (io.in.control_X.memoryRequestType === MemoryRequestType.read)
+  private val inst_D_is_store = io.in.control_D.isMemory && (io.in.control_D.memoryRequestType === MemoryRequestType.write)
+  private val inst_D_is_branch = io.in.control_D.controlTransferType === ControlTransferType.branch
+
+  // ophaz generation block
+  private val ophaz = Bool()
   when(  // RAW dependency on rs1
-    (io.in.has_rs1_D && io.in.raddr1_D =/= 0.U) &&  // decode has rs1 and rs1 is not r0
-    (io.in.has_rd_W && io.in.raddr1_D === io.in.waddr_W) && // writeback inst writes to rs1
-    (!(io.in.has_rd_M && io.in.raddr1_D === io.in.waddr_M)) &&  // memory inst does not write to rs1
-    (!(io.in.has_rd_E && io.in.raddr1_D === io.in.waddr_E))  // execute inst does not write to rs1
+    (has_rs1_D && raddr1_D =/= 0.U) &&  // decode has rs1 and rs1 is not r0
+    (has_rd_W && raddr1_D === waddr_W) && // writeback inst writes to rs1
+    (!(has_rd_M && raddr1_D === waddr_M)) &&  // memory inst does not write to rs1
+    (!(has_rd_X && raddr1_D === waddr_X))  // execute inst does not write to rs1
   ) {
-    io.out.stall_FD := true.B  // stall inst in fetch
+    ophaz := true.B
   } .elsewhen(  // RAW dependency on rs2
-    (io.in.has_rs1_D && io.in.raddr1_D =/= 0.U) &&  // decode has rs2 and rs2 is not r0
-    (io.in.has_rd_W && io.in.raddr1_D === io.in.waddr_W) && // writeback inst writes to rs2
-    (!(io.in.has_rd_M && io.in.raddr1_D === io.in.waddr_M)) &&  // memory inst does not write to rs2
-    (!(io.in.has_rd_E && io.in.raddr1_D === io.in.waddr_E))  // execute inst does not write to rs2
+    (has_rs1_D && raddr1_D =/= 0.U) &&  // decode has rs2 and rs2 is not r0
+    (has_rd_W && raddr1_D === waddr_W) && // writeback inst writes to rs2
+    (!(has_rd_M && raddr1_D === waddr_M)) &&  // memory inst does not write to rs2
+    (!(has_rd_X && raddr1_D === waddr_X))  // execute inst does not write to rs2
   ) {
-    io.out.stall_FD := true.B  // stall inst in fetch
+    ophaz := true.B
   } .elsewhen(  // load-use dependency
-    io.in.inst_E_is_load && (
-      (io.in.has_rs1_D && io.in.raddr1_D === io.in.waddr_E) ||
-      (io.in.has_rs2_D && (io.in.raddr2_D === io.in.waddr_E) && (!io.in.inst_D_is_store))
+    inst_X_is_load && (
+      (has_rs1_D && raddr1_D === waddr_X) ||
+      (has_rs2_D && (raddr2_D === waddr_X) && (!inst_D_is_store))
     )
   ) {
-    io.out.stall_FD := true.B
-  } .elsewhen(io.in.inst_D_is_branch || io.in.inst_E_is_branch) {  // branch resolution
-    io.out.stall_FD := true.B
-  } .otherwise {
-    io.out.stall_FD := false.B
+    ophaz := true.B
+  }  .otherwise {
+    ophaz := false.B
+  }
+
+  // ready signal generation block
+  io.out.decode_ready := !ophaz
+  io.out.pre_ready := (!isBranch(io.in.inst_F)) && (!inst_D_is_branch)
+
+  def hasRs1(instructionType: InstructionType.Type): Bool = {
+    (instructionType === InstructionType.R) || (instructionType === InstructionType.I) || (instructionType === InstructionType.S) || (instructionType === InstructionType.B)
+  }
+
+  def hasRs2(instructionType: InstructionType.Type): Bool = {
+    (instructionType === InstructionType.R) || (instructionType === InstructionType.S) || (instructionType === InstructionType.B)
+  }
+
+  def hasRd(instructionType: InstructionType.Type): Bool = {
+    (instructionType =/= InstructionType.S) && (instructionType =/= InstructionType.B)
+  }
+
+  def isBranch(inst: UInt) : Bool = {
+    (inst === Instructions.BEQ) || (inst === Instructions.BGE) || (inst === Instructions.BGEU) || (inst === Instructions.BLT) || (inst === Instructions.BLTU) || (inst === Instructions.BNE)
   }
 }
-

@@ -94,9 +94,7 @@ class Control(private val coreParam: CoreParam) extends Bundle {
   val branchType = BranchType()
 
   // for stalling control
-  val has_rs1 = Bool()
-  val has_rs2 = Bool()
-  val has_rd = Bool()
+  val instructionType = InstructionType()
 
   def nop(): Control = {
     val control = new Control(coreParam)
@@ -122,9 +120,7 @@ class Control(private val coreParam: CoreParam) extends Bundle {
     control.exception.valid := false.B
     control.branchTaken := false.B
     control.branchType := BranchType.none
-    control.has_rs1 := false.B
-    control.has_rs2 := false.B
-    control.has_rd := false.B
+    control.instructionType := InstructionType.I
     control
   }
 }
