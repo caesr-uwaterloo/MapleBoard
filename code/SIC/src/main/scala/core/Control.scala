@@ -97,6 +97,36 @@ class Control(private val coreParam: CoreParam) extends Bundle {
   val has_rs1 = Bool()
   val has_rs2 = Bool()
   val has_rd = Bool()
+
+  def nop(): Control = {
+    val control = new Control(coreParam)
+    control.isW := false.B
+    control.aluop := ALUOP.undef
+    control.raddr1 := 0.U
+    control.raddr2 := 0.U
+    control.waddr := 0.U
+    control.wen := 0.U
+    control.controlTransferType := ControlTransferType.none
+    control.isMemory := false.B
+    control.memoryRequestType := MemoryRequestType.read
+    control.isAMO := false.B
+    control.amoOp := AMOOP.none
+    control.acquire := false.B
+    control.release := false.B
+    control.length := 0.U
+    control.in1Sel := In1Sel.reg
+    control.in2Sel := In2Sel.reg
+    control.csrOp := CSROP.nop
+    control.csrAddress := 0.U
+    control.csrSource := CSRSourceSel.reg
+    control.exception.valid := false.B
+    control.branchTaken := false.B
+    control.branchType := BranchType.none
+    control.has_rs1 := false.B
+    control.has_rs2 := false.B
+    control.has_rd := false.B
+    control
+  }
 }
 
 
@@ -123,6 +153,9 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
   when (io.in.control.valid && io.out.control.ready) {
     control := io.in.control.bits
     data := io.in.data.bits
+  } .otherwise {
+    control := control.nop()
+    data := io.in.data.bits
   }
   valid := io.in.control.valid && io.out.control.ready
 
@@ -130,6 +163,72 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
   io.out.data.bits := data
   io.out.control.valid := valid
   io.out.data.valid := valid
+}
 
-  // TODO: if next stage is ready but the previous stage is not valid, pass NOP data and control to next stage
+/**
+  *  DX stage interface with bypass
+  */
+class DXStageInterface(private val coreParam: CoreParam) extends Module {
+  val io = IO(new Bundle {
+    val in = Flipped(new StageInterfaceIO(coreParam))
+    val out = new StageInterfaceIO(coreParam)
+    val regData1_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
+    val regData2_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
+  })
+  val control = Reg(new Control(coreParam))
+  val data = Reg(new DataPath(coreParam))
+  val valid = Reg(Bool())
+  // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
+  // TODO: combine the two decoupled interfaces into one
+  when (io.in.control.valid && io.out.control.ready) {
+    control := io.in.control.bits
+    data := io.in.data.bits
+  } .otherwise {
+    control := control.nop()
+    data := io.in.data.bits
+  }
+  valid := io.in.control.valid && io.out.control.ready
+
+  io.out.control.bits := control
+  io.out.data.bits := data
+
+  // reconnect bypass connection
+  io.out.data.bits.regData1 := io.regData1_bypass
+  io.out.data.bits.regData2 := io.regData2_bypass
+
+  io.out.control.valid := valid
+  io.out.data.valid := valid
+}
+
+/**
+  *  XM stage interface with bypass
+  */
+class XMStageInterface(private val coreParam: CoreParam) extends Module {
+  val io = IO(new Bundle {
+    val in = Flipped(new StageInterfaceIO(coreParam))
+    val out = new StageInterfaceIO(coreParam)
+    val memData_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
+  })
+  val control = Reg(new Control(coreParam))
+  val data = Reg(new DataPath(coreParam))
+  val valid = Reg(Bool())
+  // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
+  // TODO: combine the two decoupled interfaces into one
+  when (io.in.control.valid && io.out.control.ready) {
+    control := io.in.control.bits
+    data := io.in.data.bits
+  } .otherwise {
+    control := control.nop()
+    data := io.in.data.bits
+  }
+  valid := io.in.control.valid && io.out.control.ready
+
+  io.out.control.bits := control
+  io.out.data.bits := data
+
+  // reconnect bypass connection
+  io.out.data.bits.memoryData := io.memData_bypass
+
+  io.out.control.valid := valid
+  io.out.data.valid := valid
 }

@@ -29,9 +29,9 @@ class Core(coreParam: CoreParam) extends Module {
 
   private val fetch = Module(new Fetch(coreParam))
   private val decode = Module(new Decode(coreParam))
-  private val dxInterface = Module(StageInterface(coreParam))
+  private val dxInterface = Module(new DXStageInterface(coreParam))
   private val execute = Module(new Execute(coreParam))
-  private val xmInterface = Module(StageInterface(coreParam))
+  private val xmInterface = Module(new XMStageInterface(coreParam))
   private val memory = Module(new Memory(coreParam))
   private val mwInterface = Module(StageInterface(coreParam))
   private val writeBack = Module(new WriteBack(coreParam))
@@ -81,14 +81,14 @@ class Core(coreParam: CoreParam) extends Module {
   // Execute
   dxInterface.io.in.data.bits.regData1 := registerFile.io.rdata1
   dxInterface.io.in.data.bits.regData2 := registerFile.io.rdata2
+  dxInterface.io.regData1_bypass := bypass.io.out.regData1  // bypass
+  dxInterface.io.regData2_bypass := bypass.io.out.regData2  // bypass
   execute.io.controlInput <> dxInterface.io.out.control
   execute.io.dataInput <> dxInterface.io.out.data
 
-  execute.io.dataInput.bits.regData1 := bypass.io.out.regData1  // bypass connection
-  execute.io.dataInput.bits.regData2 := bypass.io.out.regData2  // bypass connection
-
   execute.io.controlOutput <> xmInterface.io.in.control
   execute.io.dataOutput <> xmInterface.io.in.data
+  xmInterface.io.memData_bypass := bypass.io.out.memData  // bypass
 
   // Memory
   memory.io.controlInput <> xmInterface.io.out.control
@@ -97,8 +97,6 @@ class Core(coreParam: CoreParam) extends Module {
   memory.io.dataOutput <> mwInterface.io.in.data
   memory.io.dCacheReq <> io.dCacheReq
   memory.io.dCacheResp <> io.dCacheResp
-
-  memory.io.dataInput.bits.memoryData := bypass.io.out.memData  // bypass connection
 
   // WriteBack
   writeBack.io.controlInput <> mwInterface.io.out.control
