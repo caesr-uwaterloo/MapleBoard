@@ -24,7 +24,7 @@ class PipelineControlOutput(private val coreParam: CoreParam) extends Bundle {
   private val isaParam = coreParam.isaParam
 
   val fetchReq_valid = Bool()
-  val fetch_valid = Bool()
+  val decode_ready = Bool()
 }
 
 class PipelineControl(private val coreParam: CoreParam) extends Module {
@@ -76,7 +76,7 @@ class PipelineControl(private val coreParam: CoreParam) extends Module {
   }
 
   // output signal
-  io.out.fetch_valid := !ophaz  // instruction in fetch state is not ready to enter decode state because of data hazard
+  io.out.decode_ready := !ophaz  // instruction in decode state is not ready to enter execute state because of data hazard
   io.out.fetchReq_valid := (!inst_X_is_branch) && (!inst_D_is_branch)  // do not start fetching request if branch is pending
 
   def hasRs1(instructionType: InstructionType.Type): Bool = {

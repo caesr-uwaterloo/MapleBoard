@@ -77,7 +77,7 @@ class Core(coreParam: CoreParam) extends Module {
   registerFile.io.raddr2 := decode.io.control.bits.raddr2
   decode.io.control <> dxInterface.io.in.control
   decode.io.data <> dxInterface.io.in.data
-  decode.io.fetchValid := pipelineControl.io.out.fetch_valid
+  decode.io.decode_ready := pipelineControl.io.out.decode_ready
 
   // Execute
   dxInterface.io.in.data.bits.regData1 := registerFile.io.rdata1

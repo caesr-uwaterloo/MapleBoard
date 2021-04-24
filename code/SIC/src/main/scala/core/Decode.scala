@@ -15,7 +15,7 @@ class DecodeIO(private val coreParam: CoreParam) extends Bundle {
   private val genDataPipe = new DataPath(coreParam)
   private val genFetchResponse = new FetchResponse(coreParam.isaParam)
   val fetchResp = Flipped(Decoupled(genFetchResponse))
-  val fetchValid = Input(Bool())
+  val decode_ready = Input(Bool())
 
   val control = Decoupled(genControl)
   val data = Decoupled(genDataPipe)
@@ -217,8 +217,8 @@ class Decode(coreParam: CoreParam) extends Module {
   setDecodeVector(DecodeVector.nop())
   val insnMatched = generateDecodeLogic(io.fetchResp.bits.instruction)
 
-
-  io.fetchResp.ready := io.control.ready && io.fetchValid
+  // fetchResp is the stage interface between fetch stage and decode stage
+  io.fetchResp.ready := io.control.ready && io.decode_ready
 
   insnDecomp.io.instruction := io.fetchResp.bits.instruction
   insnDecomp.io.instructionType := decodeVector.instructionType

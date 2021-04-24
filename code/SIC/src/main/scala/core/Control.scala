@@ -3,7 +3,7 @@ package core
 
 import chisel3._
 import chisel3.experimental.ChiselEnum
-import chisel3.util.{Decoupled, log2Ceil}
+import chisel3.util.{Decoupled, DecoupledIO, log2Ceil}
 import param.CoreParam
 
 object In1Sel extends ChiselEnum {
@@ -144,14 +144,15 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
   val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
   val valid = RegInit(false.B)
-  // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
-  // TODO: combine the two decoupled interfaces into one
-  when (io.in.control.valid && io.out.control.ready) {
-    control := io.in.control.bits
-    data := io.in.data.bits
-  } .otherwise {
-    control := control.nop()
-    data := io.in.data.bits
+  // we have two decoupled interfaces in StageInterfaceIO but only using one (Control) of the ready/valid pairs
+  when (io.out.control.ready) {
+    when (io.in.control.valid) {
+      control := io.in.control.bits
+      data := io.in.data.bits
+    } .otherwise {
+      control := control.nop()
+      data := io.in.data.bits
+    }
   }
   valid := io.in.control.valid && io.out.control.ready
 
@@ -174,14 +175,15 @@ class DXStageInterface(private val coreParam: CoreParam) extends Module {
   val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
   val valid = RegInit(false.B)
-  // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
-  // TODO: combine the two decoupled interfaces into one
-  when (io.in.control.valid && io.out.control.ready) {
-    control := io.in.control.bits
-    data := io.in.data.bits
-  } .otherwise {
-    control := control.nop()
-    data := io.in.data.bits
+  // we have two decoupled interfaces in StageInterfaceIO but only using one (Control) of the ready/valid pairs
+  when (io.out.control.ready) {
+    when (io.in.control.valid) {
+      control := io.in.control.bits
+      data := io.in.data.bits
+    } .otherwise {
+      control := control.nop()
+      data := io.in.data.bits
+    }
   }
   valid := io.in.control.valid && io.out.control.ready
 
@@ -208,14 +210,15 @@ class XMStageInterface(private val coreParam: CoreParam) extends Module {
   val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
   val valid = RegInit(false.B)
-  // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
-  // TODO: combine the two decoupled interfaces into one
-  when (io.in.control.valid && io.out.control.ready) {
-    control := io.in.control.bits
-    data := io.in.data.bits
-  } .otherwise {
-    control := control.nop()
-    data := io.in.data.bits
+  // we have two decoupled interfaces in StageInterfaceIO but only using one (Control) of the ready/valid pairs
+  when (io.out.control.ready) {
+    when (io.in.control.valid) {
+      control := io.in.control.bits
+      data := io.in.data.bits
+    } .otherwise {
+      control := control.nop()
+      data := io.in.data.bits
+    }
   }
   valid := io.in.control.valid && io.out.control.ready
 
