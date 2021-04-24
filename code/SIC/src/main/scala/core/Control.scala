@@ -141,9 +141,9 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
     val in = Flipped(new StageInterfaceIO(coreParam))
     val out = new StageInterfaceIO(coreParam)
   })
-  val control = Reg(new Control(coreParam))
+  val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
-  val valid = Reg(Bool())
+  val valid = RegInit(false.B)
   // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
   // TODO: combine the two decoupled interfaces into one
   when (io.in.control.valid && io.out.control.ready) {
@@ -171,9 +171,9 @@ class DXStageInterface(private val coreParam: CoreParam) extends Module {
     val regData1_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
     val regData2_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
   })
-  val control = Reg(new Control(coreParam))
+  val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
-  val valid = Reg(Bool())
+  val valid = RegInit(false.B)
   // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
   // TODO: combine the two decoupled interfaces into one
   when (io.in.control.valid && io.out.control.ready) {
@@ -205,9 +205,9 @@ class XMStageInterface(private val coreParam: CoreParam) extends Module {
     val out = new StageInterfaceIO(coreParam)
     val memData_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
   })
-  val control = Reg(new Control(coreParam))
+  val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
-  val valid = Reg(Bool())
+  val valid = RegInit(false.B)
   // we have two decoupled interfaces in StageInterfaceIO but only using one of the ready/valid pairs
   // TODO: combine the two decoupled interfaces into one
   when (io.in.control.valid && io.out.control.ready) {

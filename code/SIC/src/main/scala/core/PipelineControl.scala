@@ -11,7 +11,6 @@ import param.CoreParam
 class PipelineControlInput(private val coreParam: CoreParam) extends Bundle {
   private val isaParam = coreParam.isaParam
 
-  val inst_F = UInt(isaParam.XLEN.W)
   val control_D = new Control(coreParam)
   val control_X = new Control(coreParam)
   val control_M = new Control(coreParam)
@@ -24,10 +23,8 @@ class PipelineControlInput(private val coreParam: CoreParam) extends Bundle {
 class PipelineControlOutput(private val coreParam: CoreParam) extends Bundle {
   private val isaParam = coreParam.isaParam
 
-  // signal <state>_ready means instruction in <state> is ready to enter the next state
-  val pre_ready = Bool()
-  val fetch_ready = Bool()
-  val decode_ready = Bool()
+  val fetchReq_valid = Bool()
+  val fetch_valid = Bool()
 }
 
 class PipelineControl(private val coreParam: CoreParam) extends Module {
@@ -49,6 +46,7 @@ class PipelineControl(private val coreParam: CoreParam) extends Module {
   private val inst_X_is_load = io.in.control_X.isMemory && (io.in.control_X.memoryRequestType === MemoryRequestType.read)
   private val inst_D_is_store = io.in.control_D.isMemory && (io.in.control_D.memoryRequestType === MemoryRequestType.write)
   private val inst_D_is_branch = io.in.control_D.controlTransferType === ControlTransferType.branch
+  private val inst_X_is_branch = io.in.control_X.controlTransferType === ControlTransferType.branch
 
   // ophaz generation block
   private val ophaz = Bool()
@@ -77,9 +75,9 @@ class PipelineControl(private val coreParam: CoreParam) extends Module {
     ophaz := false.B
   }
 
-  // ready signal generation block
-  io.out.decode_ready := !ophaz
-  io.out.pre_ready := (!isBranch(io.in.inst_F)) && (!inst_D_is_branch)
+  // output signal
+  io.out.fetch_valid := !ophaz  // instruction in fetch state is not ready to enter decode state because of data hazard
+  io.out.fetchReq_valid := (!inst_X_is_branch) && (!inst_D_is_branch)  // do not start fetching request if branch is pending
 
   def hasRs1(instructionType: InstructionType.Type): Bool = {
     (instructionType === InstructionType.R) || (instructionType === InstructionType.I) || (instructionType === InstructionType.S) || (instructionType === InstructionType.B)
@@ -91,9 +89,5 @@ class PipelineControl(private val coreParam: CoreParam) extends Module {
 
   def hasRd(instructionType: InstructionType.Type): Bool = {
     (instructionType =/= InstructionType.S) && (instructionType =/= InstructionType.B)
-  }
-
-  def isBranch(inst: UInt) : Bool = {
-    (inst === Instructions.BEQ) || (inst === Instructions.BGE) || (inst === Instructions.BGEU) || (inst === Instructions.BLT) || (inst === Instructions.BLTU) || (inst === Instructions.BNE)
   }
 }

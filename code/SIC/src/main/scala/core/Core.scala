@@ -38,11 +38,12 @@ class Core(coreParam: CoreParam) extends Module {
   private val registerFile = Module(new RegisterFile(isaParam))
   private val csr = Module(new CSR(coreParam))
   private val bypass = Module(new Bypass(coreParam))
+  private val pipelineControl = Module(new PipelineControl(coreParam))
 
   // Wires
   private val pcPlus4 = fetch.io.fetchResp.bits.pc
-  private val jumpTarget = execute.io.dataOutput.bits.branchTarget
-  private val branchTarget = execute.io.dataOutput.bits.branchTarget
+  private val jumpTarget = xmInterface.io.out.data.bits.branchTarget
+  private val branchTarget = xmInterface.io.out.data.bits.branchTarget
 
   // Fetch
   fetch.io.iCacheReq <> io.iCacheReq
@@ -53,8 +54,7 @@ class Core(coreParam: CoreParam) extends Module {
   fetch.io.branchTarget := branchTarget
   fetch.io.trapVectorBase := csr.io.out.trapVectorBase
   fetch.io.eret := csr.io.out.epc
-  // TODO: when pipeling, the fetchReqeust signal part needs changes
-  fetch.io.fetchReq.valid := writeBack.io.controlOutput.valid
+  fetch.io.fetchReq.valid := pipelineControl.io.out.fetchReq_valid
   fetch.io.fetchReq.bits.fetchFrom := NextPCSel.pcPlus4
   // priority from high to low:
   when(csr.io.out.exception.valid) {
@@ -77,6 +77,7 @@ class Core(coreParam: CoreParam) extends Module {
   registerFile.io.raddr2 := decode.io.control.bits.raddr2
   decode.io.control <> dxInterface.io.in.control
   decode.io.data <> dxInterface.io.in.data
+  decode.io.fetchValid := pipelineControl.io.out.fetch_valid
 
   // Execute
   dxInterface.io.in.data.bits.regData1 := registerFile.io.rdata1
@@ -121,8 +122,8 @@ class Core(coreParam: CoreParam) extends Module {
   csr.io.ctrl.data := writeBack.io.dataOutput.bits.csrWriteData
   csr.io.ctrl.irq := io.irq
   csr.io.ctrl.ipi := false.B
-  writeBack.io.controlOutput.ready := fetch.io.fetchReq.ready
-  writeBack.io.dataOutput.ready := fetch.io.fetchReq.ready
+  writeBack.io.controlOutput.ready := true.B  // writeback is always ready
+  writeBack.io.dataOutput.ready := true.B
   csr.io.ctrl.exception := writeBack.io.controlOutput.bits.exception
 
   // Bypass
@@ -140,6 +141,12 @@ class Core(coreParam: CoreParam) extends Module {
   bypass.io.in.waddr_W := mwInterface.io.out.control.bits.waddr
   bypass.io.in.wen_W := registerFile.io.wen
   bypass.io.in.raddr2_M := xmInterface.io.out.control.bits.raddr2
+
+  // Pipeline Control
+  pipelineControl.io.in.control_D <> decode.io.control
+  pipelineControl.io.in.control_X <> dxInterface.io.out.control.bits
+  pipelineControl.io.in.control_M <> xmInterface.io.out.control.bits
+  pipelineControl.io.in.control_W <> mwInterface.io.out.control.bits
 
   /** todo why optimized out? **/
   val irq = dontTouch(io.irq)
