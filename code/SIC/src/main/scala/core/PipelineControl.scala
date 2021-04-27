@@ -49,7 +49,7 @@ class PipelineControl(private val coreParam: CoreParam) extends Module {
   private val inst_X_is_branch = io.in.control_X.controlTransferType === ControlTransferType.branch
 
   // ophaz generation block
-  private val ophaz = Bool()
+  private val ophaz = Wire(Bool())
   when(  // RAW dependency on rs1
     (has_rs1_D && raddr1_D =/= 0.U) &&  // decode has rs1 and rs1 is not r0
     (has_rd_W && raddr1_D === waddr_W) && // writeback inst writes to rs1

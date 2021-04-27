@@ -6,8 +6,46 @@ import chisel3.util._
 import chisel3.experimental._
 import param.CoreParam
 
+import scala.collection.mutable.ListBuffer
+import scala.io.Source
+
+object MemoryInitializer {
+  def init() : List[String] = {
+    val x_file = Source.fromFile("x_file_path")  // replace the x file here
+    val temp = new ListBuffer[String]
+    for (line <- x_file.getLines) {
+      temp += line
+    }
+    x_file.close()
+    temp.toList
+  }
+
+  val mem = init()
+
+  def getMemContent(addr: Int): String = {
+    val a = addr / 4
+    val b = addr % 4
+    var s = ""
+    if (a >= mem.length) {
+      "h00000000"
+    } else {
+      if (b == 0) {
+        s = mem(a).slice(6, 8)
+      } else if (b == 1) {
+        s = mem(a).slice(4, 6)
+      } else if (b == 2) {
+        s = mem(a).slice(2, 4)
+      } else {
+        s = mem(a).slice(0, 2)
+      }
+      "h" + s
+    }
+  }
+}
+
+
 // Now we need to support multiple words
-class MemoryDPI(coreParam: CoreParam) extends BlackBox {
+class MemoryDPI(coreParam: CoreParam) extends Module {
   private val addrWidth = 64
   private val wordWidth = 64
   override def desiredName: String = "MemoryDPI"
@@ -23,6 +61,37 @@ class MemoryDPI(coreParam: CoreParam) extends BlackBox {
       val respData = Output(UInt(wordWidth.W))
     }
   )
+
+  private val read = MemoryRequestType.read.litValue().U
+  private val write = MemoryRequestType.write.litValue().U
+  //1048576
+  val mem = RegInit(VecInit(for {i <- 0 until 200} yield MemoryInitializer.getMemContent(i).U))
+  println("Memory initialization done\n")
+
+  private val addr = io.reqAddr
+
+  io.respData := 0.U
+
+  val readport = RegInit(0.U(wordWidth.W))
+
+  io.respData := readport
+
+  when (io.reset.asBool === true.B) {
+    // empty
+  } .otherwise {
+    when (io.valid) {
+      when (io.reqType === read) {
+        readport := Cat(mem(addr + 7.U), mem(addr + 6.U), mem(addr + 5.U), mem(addr + 4.U), mem(addr + 3.U), mem(addr + 2.U), mem(addr + 1.U), mem(addr))
+      } .elsewhen (io.reqType === write) {
+        for (i <- 0 until coreParam.isaParam.XLEN / 8) {
+          when (io.reqStrb(i)) {
+            mem(addr + i.U) := io.reqData(i * 8 + 7, i * 8)
+          }
+        }
+      }
+    }
+  }
+
 }
 
 /**

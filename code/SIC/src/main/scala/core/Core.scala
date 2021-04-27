@@ -17,6 +17,7 @@ class CoreIO(private val coreParam: CoreParam) extends Bundle {
   val iCacheResp = Flipped(Decoupled(genICacheResp))
   val dCacheReq = Decoupled(genDCacheReq)
   val dCacheResp = Flipped(Decoupled(genDCacheResp))
+  val inst = Output(UInt(coreParam.isaParam.instructionWidth.W))
 }
 
 /**
@@ -45,6 +46,8 @@ class Core(coreParam: CoreParam) extends Module {
   private val jumpTarget = xmInterface.io.out.data.bits.branchTarget
   private val branchTarget = xmInterface.io.out.data.bits.branchTarget
 
+  io.inst := fetch.io.fetchResp.bits.instruction
+
   // Fetch
   fetch.io.iCacheReq <> io.iCacheReq
   fetch.io.iCacheResp <> io.iCacheResp
@@ -54,7 +57,11 @@ class Core(coreParam: CoreParam) extends Module {
   fetch.io.branchTarget := branchTarget
   fetch.io.trapVectorBase := csr.io.out.trapVectorBase
   fetch.io.eret := csr.io.out.epc
-  fetch.io.fetchReq.valid := pipelineControl.io.out.fetchReq_valid
+  // fetch request valid signal logic is here
+  // the valid signal from pipelineControl is to prevent control hazard (branch is pending)
+  // we get pc + 4 from the fetchResp, so the valid siganl in fetchResp is to prevent data hazard
+  // the real valid signal should be the sum of the two valid signals above
+  fetch.io.fetchReq.valid := pipelineControl.io.out.fetchReq_valid && fetch.io.fetchResp.valid
   fetch.io.fetchReq.bits.fetchFrom := NextPCSel.pcPlus4
   // priority from high to low:
   when(csr.io.out.exception.valid) {
@@ -73,10 +80,15 @@ class Core(coreParam: CoreParam) extends Module {
 
   // Decode
   // register file
-  registerFile.io.raddr1 := decode.io.control.bits.raddr1
-  registerFile.io.raddr2 := decode.io.control.bits.raddr2
-  decode.io.control <> dxInterface.io.in.control
-  decode.io.data <> dxInterface.io.in.data
+  val resetting = RegInit(true.B)
+  when (resetting) {
+    resetting := false.B
+  }
+  registerFile.io.raddr1 := decode.io.controlOutput.bits.raddr1
+  registerFile.io.raddr2 := decode.io.controlOutput.bits.raddr2
+  registerFile.io.reset := resetting
+  decode.io.controlOutput <> dxInterface.io.in.control
+  decode.io.dataOutput <> dxInterface.io.in.data
   decode.io.decode_ready := pipelineControl.io.out.decode_ready
 
   // Execute
@@ -89,7 +101,8 @@ class Core(coreParam: CoreParam) extends Module {
 
   execute.io.controlOutput <> xmInterface.io.in.control
   execute.io.dataOutput <> xmInterface.io.in.data
-  xmInterface.io.memData_bypass := bypass.io.out.memData  // bypass
+  xmInterface.io.memBypassSel := bypass.io.out.memBypassSel  // bypass sel line
+  xmInterface.io.writeData := registerFile.io.wdata
 
   // Memory
   memory.io.controlInput <> xmInterface.io.out.control
@@ -122,7 +135,10 @@ class Core(coreParam: CoreParam) extends Module {
   csr.io.ctrl.data := writeBack.io.dataOutput.bits.csrWriteData
   csr.io.ctrl.irq := io.irq
   csr.io.ctrl.ipi := false.B
-  writeBack.io.controlOutput.ready := true.B  // writeback is always ready
+  // writeback ready signal logic is here
+  // writeback controlInput ready is directly connect to controlOutput ready within the writeback module
+  // writeback is always ready since it is the last stage and it only takes one cycle
+  writeBack.io.controlOutput.ready := true.B
   writeBack.io.dataOutput.ready := true.B
   csr.io.ctrl.exception := writeBack.io.controlOutput.bits.exception
 
@@ -131,7 +147,6 @@ class Core(coreParam: CoreParam) extends Module {
   bypass.io.in.regData1 := registerFile.io.rdata1
   bypass.io.in.regData2 := registerFile.io.rdata2
   bypass.io.in.aluData := xmInterface.io.out.data.bits.aluData
-  bypass.io.in.memData := xmInterface.io.out.data.bits.memoryData
   bypass.io.in.writeData := registerFile.io.wdata
   // control input
   bypass.io.in.raddr1_E := registerFile.io.raddr1
@@ -143,7 +158,7 @@ class Core(coreParam: CoreParam) extends Module {
   bypass.io.in.raddr2_M := xmInterface.io.out.control.bits.raddr2
 
   // Pipeline Control
-  pipelineControl.io.in.control_D <> decode.io.control
+  pipelineControl.io.in.control_D <> decode.io.controlOutput.bits
   pipelineControl.io.in.control_X <> dxInterface.io.out.control.bits
   pipelineControl.io.in.control_M <> xmInterface.io.out.control.bits
   pipelineControl.io.in.control_W <> mwInterface.io.out.control.bits
@@ -153,7 +168,7 @@ class Core(coreParam: CoreParam) extends Module {
   val icacherespready = dontTouch(io.iCacheResp.ready)
   val dcacherespready = dontTouch(io.dCacheResp.ready)
 
-  when(writeBack.io.controlOutput.valid) {
-    printf(p"[W${coreParam.coreID}] wen ${registerFile.io.wen}, reg_addr ${registerFile.io.waddr}, reg_data ${Hexadecimal(registerFile.io.wdata)}\n")
+  when(writeBack.io.controlInput.valid) {
+    printf(p"[W${coreParam.coreID}] pc ${Hexadecimal(writeBack.io.dataInput.bits.pc)}, inst: ${Hexadecimal(writeBack.io.dataInput.bits.inst)}, tval: ${Hexadecimal(writeBack.io.controlInput.bits.exception.tval)}, wen ${registerFile.io.wen}, reg_addr ${registerFile.io.waddr}, reg_data ${Hexadecimal(registerFile.io.wdata)}\n\n")
   }
 }

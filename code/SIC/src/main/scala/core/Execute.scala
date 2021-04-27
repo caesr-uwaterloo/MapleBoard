@@ -34,6 +34,18 @@ class Execute(private val coreParam: CoreParam) extends Module {
   io.controlOutput <> io.controlInput
   io.dataOutput <> io.dataInput
 
+  /**
+    * Execute stage ready valid signal generation block
+    */
+  val busy = io.controlInput.valid
+  io.controlInput.ready := !busy || io.controlOutput.fire()
+  io.dataInput.ready := io.controlInput.ready
+  io.controlOutput.valid := io.controlInput.valid
+  io.dataOutput.valid := io.controlOutput.valid
+  /**
+    * block end
+    */
+
   switch(io.controlInput.bits.in1Sel) {
     is(In1Sel.pc) { in1Mux := io.dataInput.bits.pc }
     is(In1Sel.reg) { in1Mux := io.dataInput.bits.regData1 }
@@ -70,9 +82,9 @@ class Execute(private val coreParam: CoreParam) extends Module {
     is(CSRSourceSel.reg) { io.dataOutput.bits.csrWriteData := io.dataInput.bits.regData1 } // bypassing
     is(CSRSourceSel.uimm) { io.dataOutput.bits.csrWriteData := io.controlInput.bits.raddr1 } // zero extension
   }
-  when(io.controlInput.fire()) {
+  when(io.controlInput.valid) {
     printf(p"[E${coreParam.coreID}] controlTransferType: ${io.controlInput.bits.controlTransferType.asUInt} branchType: ${io.controlInput.bits.branchType.asUInt}, branchTaken: ${io.controlOutput.bits.branchTaken.asUInt}, branchTarget: ${Hexadecimal(branchTarget)}\n")
-    printf(p"[E${coreParam.coreID}] pc: ${Hexadecimal(io.dataInput.bits.pc)} + ${Hexadecimal(io.dataInput.bits.imm)}\n")
+    printf(p"[E${coreParam.coreID}] pc: ${Hexadecimal(io.dataInput.bits.pc)} + ${Hexadecimal(io.dataInput.bits.imm)}, inst: ${Hexadecimal(io.dataOutput.bits.inst)}, tval: ${Hexadecimal(io.controlOutput.bits.exception.tval)}\n")
     printf(p"[E${coreParam.coreID}] rs1: ${io.controlInput.bits.in1Sel.asUInt} in1: ${Hexadecimal(alu.io.in1)} rs2: ${io.controlInput.bits.in2Sel.asUInt} in2: ${Hexadecimal(alu.io.in2)} aluout: ${Hexadecimal(alu.io.out)}\n")
     printf(p"[E${coreParam.coreID}] regData2: ${Hexadecimal(io.dataInput.bits.regData2)}\n")
   }

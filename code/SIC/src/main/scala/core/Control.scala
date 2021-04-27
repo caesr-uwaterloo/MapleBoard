@@ -4,6 +4,7 @@ package core
 import chisel3._
 import chisel3.experimental.ChiselEnum
 import chisel3.util.{Decoupled, DecoupledIO, log2Ceil}
+import riscv.Causes
 import param.CoreParam
 
 object In1Sel extends ChiselEnum {
@@ -23,6 +24,9 @@ object MemoryRequestType extends ChiselEnum {
 
 class DataPath(private val coreParam: CoreParam) extends Bundle {
   private val isaParam = coreParam.isaParam
+
+  // inst for debug
+  val inst = UInt(isaParam.instructionWidth.W)
 
   // immediate
   val imm = UInt(isaParam.XLEN.W)
@@ -97,7 +101,7 @@ class Control(private val coreParam: CoreParam) extends Bundle {
   val instructionType = InstructionType()
 
   def nop(): Control = {
-    val control = new Control(coreParam)
+    val control = Wire(new Control(coreParam))
     control.isW := false.B
     control.aluop := ALUOP.undef
     control.raddr1 := 0.U
@@ -118,6 +122,8 @@ class Control(private val coreParam: CoreParam) extends Bundle {
     control.csrAddress := 0.U
     control.csrSource := CSRSourceSel.reg
     control.exception.valid := false.B
+    control.exception.cause := Causes.illegal_instruction.U
+    control.exception.tval := 0.U
     control.branchTaken := false.B
     control.branchType := BranchType.none
     control.instructionType := InstructionType.I
@@ -144,7 +150,10 @@ class StageInterface(private val coreParam: CoreParam) extends Module {
   val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
   val valid = RegInit(false.B)
-  // we have two decoupled interfaces in StageInterfaceIO but only using one (Control) of the ready/valid pairs
+
+  io.in.control.ready := io.out.control.ready
+  io.in.data.ready := io.out.data.ready
+
   when (io.out.control.ready) {
     when (io.in.control.valid) {
       control := io.in.control.bits
@@ -175,7 +184,10 @@ class DXStageInterface(private val coreParam: CoreParam) extends Module {
   val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
   val valid = RegInit(false.B)
-  // we have two decoupled interfaces in StageInterfaceIO but only using one (Control) of the ready/valid pairs
+
+  io.in.control.ready := io.out.control.ready
+  io.in.data.ready := io.out.data.ready
+
   when (io.out.control.ready) {
     when (io.in.control.valid) {
       control := io.in.control.bits
@@ -205,12 +217,16 @@ class XMStageInterface(private val coreParam: CoreParam) extends Module {
   val io = IO(new Bundle {
     val in = Flipped(new StageInterfaceIO(coreParam))
     val out = new StageInterfaceIO(coreParam)
-    val memData_bypass = Input(UInt(coreParam.isaParam.XLEN.W))
+    val writeData = Input(UInt(coreParam.isaParam.XLEN.W))  // data to write in write stage
+    val memBypassSel = Input(MemBypassSel())
   })
   val control = RegInit(new Control(coreParam).nop())
   val data = Reg(new DataPath(coreParam))
   val valid = RegInit(false.B)
-  // we have two decoupled interfaces in StageInterfaceIO but only using one (Control) of the ready/valid pairs
+
+  io.in.control.ready := io.out.control.ready
+  io.in.data.ready := io.out.data.ready
+
   when (io.out.control.ready) {
     when (io.in.control.valid) {
       control := io.in.control.bits
@@ -226,7 +242,9 @@ class XMStageInterface(private val coreParam: CoreParam) extends Module {
   io.out.data.bits := data
 
   // reconnect bypass connection
-  io.out.data.bits.memoryData := io.memData_bypass
+  when (io.memBypassSel === MemBypassSel.wm) {
+    io.out.data.bits.memoryData := io.writeData
+  }
 
   io.out.control.valid := valid
   io.out.data.valid := valid

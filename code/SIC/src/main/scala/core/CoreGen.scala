@@ -5,6 +5,8 @@ import java.io.{File, PrintWriter}
 
 import param.{CoreParam, RISCVParam}
 
+import chisel3._
+
 object HeaderGen {
   def generateHeaders(args: Array[String], coreParam: CoreParam): Unit = {
     def getVerilogFolder: Option[String] = {
@@ -53,10 +55,14 @@ object CoreGen extends App {
     baseAddrAddress = 0x80001000L,
     coreID = 0,
     withAXIMemoryInterface = true,
-    nCore = 3)
+    nCore = 1)
 
-  chisel3.Driver.execute(args, () => new CoreGroupAXI(coreParam))
+  //val top = new CoreGroupAXIWithMemory(coreParam)
+  //top.io.baseAddress := "h_0100_0000".U
+  //top.io.initPC := "h_0100_0000".U
 
-  HeaderGen.generateHeaders(args, coreParam)
+  chisel3.Driver.execute(args, () => new CoreGroupAXIWithMemory(coreParam))
+
+  //HeaderGen.generateHeaders(args, coreParam)
 
 }

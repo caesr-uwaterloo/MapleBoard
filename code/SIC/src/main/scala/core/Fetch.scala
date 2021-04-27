@@ -85,12 +85,12 @@ class Fetch(coreParam: CoreParam) extends Module {
     is(NextPCSel.pcPlus4) { npc := io.pcPlus4 }
     is(NextPCSel.trapVectorBase) { npc := io.trapVectorBase }
   }
-  val resetting = RegInit(1.U)
+  val resetting = RegInit(true.B)
 
   val reqQ = Module(new Queue(genICacheReq, coreParam.iCacheReqDepth))
   val respQ = Module(new Queue(genFetchResponse, coreParam.iCacheRespDepth))
 
-  io.iCacheReq.valid := reqQ.io.deq.valid && resetting =/= 1.U
+  io.iCacheReq.valid := reqQ.io.deq.valid || resetting === 1.U
   reqQ.io.deq.ready := io.iCacheReq.ready
   io.iCacheReq.bits := reqQ.io.deq.bits
 
@@ -106,24 +106,24 @@ class Fetch(coreParam: CoreParam) extends Module {
   respQ.io.enq.bits.instruction := io.iCacheResp.bits.data
   io.iCacheResp.ready := respQ.io.enq.ready
 
-  when(resetting === 1.U) {
+  when(resetting === true.B) {
     reqQ.io.enq.valid := 1.U
     reqQ.io.enq.bits.address := io.initPC
     reqQ.io.enq.bits.length := 2.U
   }
-  // done resetting pc
-  when(resetting === 1.U) {
-    when(reqQ.io.enq.fire()) {
-      resetting := 0.U
-    }
+
+  when(io.iCacheReq.fire() && resetting) {
+    printf("Reset done!\n")
+    resetting := false.B
   }
-  when(io.fetchReq.fire()) {
-    printf(p"[F${coreParam.coreID}] ${io.fetchReq}, addr: ${Hexadecimal(reqQ.io.enq.bits.address)}, resetting: ${resetting}\n")
-  }
+
+//  printf(p"[F${coreParam.coreID} FetchRequest] valid: ${reqQ.io.enq.valid}, ready: ${reqQ.io.enq.ready}, pc: ${Hexadecimal(reqQ.io.enq.bits.address)}, resetting: ${resetting}\n")
+//  printf(p"[F${coreParam.coreID} ICacheRequestEnq] valid: ${io.iCacheReq.valid}, ready: ${io.iCacheReq.ready}, pc: ${Hexadecimal(io.iCacheReq.bits.address)}\n")
+
   when(io.iCacheReq.fire()) {
-    printf(p"[F${coreParam.coreID}] ${io.iCacheReq}, resetting: ${resetting}\n")
+    printf(p"[F${coreParam.coreID}] pc: ${Hexadecimal(reqQ.io.enq.bits.address)}\n")
   }
-  when(io.iCacheResp.fire()) {
-    printf(p"[F${coreParam.coreID}] ${io.iCacheResp}, resetting: ${resetting}\n")
-  }
+//  when(io.iCacheResp.fire()) {
+//    printf(p"[F${coreParam.coreID}] ${io.iCacheResp}, resetting: ${resetting}\n")
+//  }
 }

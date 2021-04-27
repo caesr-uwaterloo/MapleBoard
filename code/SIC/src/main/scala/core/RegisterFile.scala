@@ -15,6 +15,7 @@ class RegisterFileIO(private val isaParam: RISCVParam) extends Bundle {
   val wen = Input(Bool())
   val waddr = Input(UInt(log2Ceil(isaParam.registerCount).W))
   val wdata = Input(UInt(isaParam.XLEN.W))
+  val reset = Input(Bool())
 }
 
 class RegisterFile(isaParam: RISCVParam) extends Module {
@@ -25,6 +26,10 @@ class RegisterFile(isaParam: RISCVParam) extends Module {
 
   io.rdata1 := data(io.raddr1)
   io.rdata2 := data(io.raddr2)
+
+  when (io.reset) {
+    data(2) := "h_0100_0000".U + 200.U  // initialize sp at the end of the memory region, assume memory depth is 200 and starts from 0x0100_0000
+  }
 
   when(io.wen && io.waddr =/= 0.U) {
     data(io.waddr) := io.wdata

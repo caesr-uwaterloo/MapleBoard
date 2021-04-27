@@ -15,10 +15,10 @@ class DecodeIO(private val coreParam: CoreParam) extends Bundle {
   private val genDataPipe = new DataPath(coreParam)
   private val genFetchResponse = new FetchResponse(coreParam.isaParam)
   val fetchResp = Flipped(Decoupled(genFetchResponse))
-  val decode_ready = Input(Bool())
+  val decode_ready = Input(Bool())  // from PipelineControl Unit
 
-  val control = Decoupled(genControl)
-  val data = Decoupled(genDataPipe)
+  val controlOutput = Decoupled(genControl)
+  val dataOutput = Decoupled(genDataPipe)
 }
 
 object ControlTransferType extends ChiselEnum {
@@ -217,64 +217,76 @@ class Decode(coreParam: CoreParam) extends Module {
   setDecodeVector(DecodeVector.nop())
   val insnMatched = generateDecodeLogic(io.fetchResp.bits.instruction)
 
-  // fetchResp is the stage interface between fetch stage and decode stage
-  io.fetchResp.ready := io.control.ready && io.decode_ready
+  /**
+    * Decode stage ready valid signal generation block
+    */
+  val busy = io.fetchResp.valid
+  // The first term of ready signal is to prevent structural hazard
+  // io.decode_ready comes from the external PipelineControl Unit to prevent data hazard
+  // the real ready signal should be the product of the two terms above
+  io.fetchResp.ready := (!busy || io.controlOutput.fire()) && io.decode_ready
+  io.controlOutput.valid := io.fetchResp.fire()
+  io.dataOutput.valid := io.controlOutput.valid
+  /**
+    * block end
+    */
 
   insnDecomp.io.instruction := io.fetchResp.bits.instruction
   insnDecomp.io.instructionType := decodeVector.instructionType
 
   // register file control
-  io.control.bits.raddr1 := insnDecomp.io.instructionFields.rs1
-  io.control.bits.raddr2 := insnDecomp.io.instructionFields.rs2
-  io.control.bits.waddr := insnDecomp.io.instructionFields.rd
-  io.control.bits.wen := decodeVector.writeRegister
+  io.controlOutput.bits.raddr1 := insnDecomp.io.instructionFields.rs1
+  io.controlOutput.bits.raddr2 := insnDecomp.io.instructionFields.rs2
+  io.controlOutput.bits.waddr := insnDecomp.io.instructionFields.rd
+  io.controlOutput.bits.wen := decodeVector.writeRegister
 
-  io.control.bits.length := insnDecomp.io.instructionFields.funct3
+  io.controlOutput.bits.length := insnDecomp.io.instructionFields.funct3
 
-  io.control.bits.controlTransferType := decodeVector.controlTransferType
-  io.control.bits.aluop := decodeVector.aluOp
-  io.control.bits.isW := decodeVector.isW
-  io.control.bits.isMemory := decodeVector.isMemory
-  io.control.bits.acquire := insnDecomp.io.instructionFields.aq
-  io.control.bits.release := insnDecomp.io.instructionFields.rl
+  io.controlOutput.bits.controlTransferType := decodeVector.controlTransferType
+  io.controlOutput.bits.aluop := decodeVector.aluOp
+  io.controlOutput.bits.isW := decodeVector.isW
+  io.controlOutput.bits.isMemory := decodeVector.isMemory
+  io.controlOutput.bits.acquire := insnDecomp.io.instructionFields.aq
+  io.controlOutput.bits.release := insnDecomp.io.instructionFields.rl
 
-  io.control.bits.csrOp := decodeVector.csrOp
-  io.control.bits.memoryRequestType := decodeVector.memoryRequestType
-  io.control.bits.isAMO := decodeVector.amoOp =/= AMOOP.none
-  io.control.bits.amoOp := decodeVector.amoOp
+  io.controlOutput.bits.csrOp := decodeVector.csrOp
+  io.controlOutput.bits.memoryRequestType := decodeVector.memoryRequestType
+  io.controlOutput.bits.isAMO := decodeVector.amoOp =/= AMOOP.none
+  io.controlOutput.bits.amoOp := decodeVector.amoOp
 
-  io.control.bits.csrAddress := insnDecomp.io.instructionFields.csrDest
+  io.controlOutput.bits.csrAddress := insnDecomp.io.instructionFields.csrDest
 
-  io.control.bits.exception.cause := Causes.illegal_instruction.U
-  io.control.bits.exception.tval := io.fetchResp.bits.instruction
-  io.control.bits.exception.valid := !insnMatched
+  io.controlOutput.bits.exception.cause := Causes.illegal_instruction.U
+  io.controlOutput.bits.exception.tval := io.fetchResp.bits.instruction
+  io.controlOutput.bits.exception.valid := !insnMatched
   when(decodeVector.csrOp === CSROP.exception) {
-    io.control.bits.exception.cause := Causes.machine_ecall.asUInt
-    io.control.bits.exception.tval := 0.U
-    io.control.bits.exception.valid := true.B
+    io.controlOutput.bits.exception.cause := Causes.machine_ecall.asUInt
+    io.controlOutput.bits.exception.tval := 0.U
+    io.controlOutput.bits.exception.valid := true.B
   }.elsewhen(decodeVector.csrOp === CSROP.breakpoint) {
-    io.control.bits.exception.cause := Causes.breakpoint.asUInt
-    io.control.bits.exception.tval := 0.U
-    io.control.bits.exception.valid := true.B
+    io.controlOutput.bits.exception.cause := Causes.breakpoint.asUInt
+    io.controlOutput.bits.exception.tval := 0.U
+    io.controlOutput.bits.exception.valid := true.B
   }
 
-  io.control.bits.in1Sel := decodeVector.in1Sel
-  io.control.bits.in2Sel := decodeVector.in2Sel
+  io.controlOutput.bits.in1Sel := decodeVector.in1Sel
+  io.controlOutput.bits.in2Sel := decodeVector.in2Sel
 
-  io.control.bits.csrSource := decodeVector.csrSource
-  io.control.valid := io.fetchResp.valid
+  io.controlOutput.bits.csrSource := decodeVector.csrSource
+  io.controlOutput.valid := io.fetchResp.valid
 
-  io.control.bits.branchTaken := false.B
-  io.control.bits.branchType := decodeVector.branchType
+  io.controlOutput.bits.branchTaken := false.B
+  io.controlOutput.bits.branchType := decodeVector.branchType
 
-  io.control.bits.instructionType := decodeVector.instructionType
+  io.controlOutput.bits.instructionType := decodeVector.instructionType
 
   // provide default values for data path, won't be used
-  io.data.bits := 0.U.asTypeOf(io.data.bits)
-  io.data.valid := io.fetchResp.valid
-  io.data.bits.imm := insnDecomp.io.instructionFields.imm
-  io.data.bits.pcPlus4 := pcPlus4
-  io.data.bits.pc := pc
+  io.dataOutput.bits := 0.U.asTypeOf(io.dataOutput.bits)
+  io.dataOutput.valid := io.fetchResp.valid
+  io.dataOutput.bits.imm := insnDecomp.io.instructionFields.imm
+  io.dataOutput.bits.pcPlus4 := pcPlus4
+  io.dataOutput.bits.pc := pc
+  io.dataOutput.bits.inst := io.fetchResp.bits.instruction
 
   def setDecodeVector(value: DecodeVector): Unit = {
     decodeVector.controlTransferType := value.controlTransferType
@@ -308,9 +320,9 @@ class Decode(coreParam: CoreParam) extends Module {
     instructionMatched
   }
   when(io.fetchResp.fire()) {
-    printf(p"[D${coreParam.coreID}] ${io.fetchResp}, raddr2 ${io.control.bits.raddr2} \n")
+    printf(p"[D${coreParam.coreID}] pc: ${Hexadecimal(io.fetchResp.bits.pc - 4.U)}, inst: ${Hexadecimal(io.fetchResp.bits.instruction)}, isMemory: ${io.controlOutput.bits.isMemory}\n")
   }
 }
 
-object DecodeGen extends App {
-}
+//object DecodeGen extends App {
+//}

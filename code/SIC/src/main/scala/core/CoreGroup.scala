@@ -16,6 +16,7 @@ class CoreGroupAXI(coreParam: CoreParam) extends MultiIOModule {
     val coreData = Output(UInt(32.W))
     val coreValid = Output(Bool())
     val coreReady = Output(Bool())
+    val inst = Output(UInt(coreParam.isaParam.instructionWidth.W))
   })
 
   val axiTranslationLayer = Module(new AXITranslationLayer(coreParam))
@@ -39,6 +40,8 @@ class CoreGroupAXI(coreParam: CoreParam) extends MultiIOModule {
   m.coreValid := cores(0).io.iCacheResp.valid
   m.coreReady := cores(0).io.iCacheResp.ready
 
+  m.inst := cores(0).io.inst
+
   m.axi <> axiTranslationLayer.io.m_axi
   axiTranslationLayer.io.baseAddress := m.baseAddress
 }
@@ -50,10 +53,15 @@ class CoreGroupAXIWithMemory(coreParam: CoreParam) extends Module {
   val io = IO(new Bundle {
     val initPC = Input(UInt(coreParam.isaParam.XLEN.W))
     val baseAddress = Input(UInt(coreParam.isaParam.XLEN.W))
+    val inst = Output(UInt(coreParam.isaParam.instructionWidth.W))
   })
+
+  val initPC = "h_0100_0000".U
+  val baseAddress = "h_0100_0000".U
   val mem = Module(new AXIMemory(coreParam))
   val coreGroup = Module(new CoreGroupAXI(coreParam))
-  coreGroup.m.initPC := io.initPC
-  coreGroup.m.baseAddress := io.baseAddress
+  io.inst := coreGroup.m.inst
+  coreGroup.m.initPC := initPC
+  coreGroup.m.baseAddress := baseAddress
   coreGroup.m.axi <> mem.io.m_axi
 }

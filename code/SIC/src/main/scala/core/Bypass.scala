@@ -17,7 +17,7 @@ object MemBypassSel extends ChiselEnum {
   val nobypass, wm = Value
 }
 
-class BypassControl {
+class BypassControl extends Bundle {
   val rs1BypassSel = Rs1BypassSel()
   val rs2BypassSel = Rs2BypassSel()
   val memBypassSel = MemBypassSel()
@@ -31,8 +31,6 @@ class BypassInput(private val coreParam: CoreParam) extends Bundle {
   val regData2 = UInt(isaParam.XLEN.W)
   // alu output in memory stage
   val aluData = UInt(isaParam.XLEN.W)
-  // mem data to store in memory stage
-  val memData = UInt(isaParam.XLEN.W)
   // write data in write stage
   val writeData = UInt(isaParam.XLEN.W)
 
@@ -52,7 +50,7 @@ class BypassOutput(private val coreParam: CoreParam) extends Bundle {
   val regData1 = UInt(isaParam.XLEN.W)
   val regData2 = UInt(isaParam.XLEN.W)
   // memory stage
-  val memData = UInt(isaParam.XLEN.W)
+  val memBypassSel = MemBypassSel()
 }
 
 class Bypass(private val coreParam: CoreParam) extends Module {
@@ -61,9 +59,12 @@ class Bypass(private val coreParam: CoreParam) extends Module {
     val out = Output(new BypassOutput(coreParam))
   })
 
-  private val bypassControl = new BypassControl()
+  private val bypassControl = Wire(new BypassControl())
 
   // Datapath
+  io.out.regData1 := 0.U
+  io.out.regData2 := 0.U
+
   switch(bypassControl.rs1BypassSel) {
     is(Rs1BypassSel.nobypass) { io.out.regData1 := io.in.regData1 }
     is(Rs1BypassSel.mx) {  io.out.regData1 := io.in.aluData }
@@ -74,11 +75,6 @@ class Bypass(private val coreParam: CoreParam) extends Module {
     is(Rs2BypassSel.nobypass) { io.out.regData2 := io.in.regData2 }
     is(Rs2BypassSel.mx) {  io.out.regData2 := io.in.aluData }
     is(Rs2BypassSel.wx) { io.out.regData2 := io.in.writeData }
-  }
-
-  switch(bypassControl.memBypassSel) {
-    is(MemBypassSel.nobypass) { io.out.memData := io.in.memData }
-    is(MemBypassSel.wm) {  io.out.memData := io.in.writeData }
   }
 
   // Control logic
@@ -105,15 +101,19 @@ class Bypass(private val coreParam: CoreParam) extends Module {
       bypassControl.rs2BypassSel := Rs2BypassSel.nobypass
     }
   } .otherwise {
-    bypassControl.rs2BypassSel := Rs1BypassSel.nobypass
+    bypassControl.rs2BypassSel := Rs2BypassSel.nobypass
   }
 
   when(io.in.raddr2_M =/= 0.U) {
     when(io.in.raddr2_M === io.in.waddr_W && io.in.wen_W === true.B) {
       bypassControl.memBypassSel := MemBypassSel.wm
+    } .otherwise {
+      bypassControl.memBypassSel := MemBypassSel.nobypass
     }
   } .otherwise {
     bypassControl.memBypassSel := MemBypassSel.nobypass
   }
+
+  io.out.memBypassSel := bypassControl.memBypassSel
 
 }
